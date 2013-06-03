@@ -67,7 +67,7 @@ namespace SpreadBet.Common.Components
 			#endregion
 		}
 
-		public List<Entities.StockPrice> GetStockPrices()
+		public IEnumerable<Entities.StockPrice> GetStockPrices()
 		{
 			var timePeriod = TimePeriodHelper.GetTimePeriod(DateTime.UtcNow);
 

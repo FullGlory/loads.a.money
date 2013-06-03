@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompositeStockFilterTests.cs" />
+    <Compile Include="DecisionByGrowthAndCurrentPosition..cs" />
     <Compile Include="ExistingStockRemovalFilterTests.cs" />
     <Compile Include="MinimumRateOfChangeStockFilterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

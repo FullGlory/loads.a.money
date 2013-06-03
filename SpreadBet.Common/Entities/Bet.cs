@@ -21,6 +21,8 @@ namespace SpreadBet.Common.Entities
 		public decimal InitialLoss { get; set; }
 		public decimal BidAmount { get; set; }
 		public decimal OpeningPosition { get; set; }
+		public decimal ExitPrice { get; set; }
+		
 		public Direction Direction { get; set; }
 	}
 
