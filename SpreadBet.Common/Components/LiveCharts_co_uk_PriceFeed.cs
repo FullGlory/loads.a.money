@@ -95,7 +95,7 @@ namespace SpreadBet.Common.Components
 		{
 			var retVal = new List<string>();
 
-			var baseUrl = new Uri("http://www.livecharts.co.uk/");
+			var baseUrl = new Uri("http://www.livecharts.co.uk");
 
 			Parallel.ForEach(this._listUrls, url => 
 			{
@@ -108,7 +108,7 @@ namespace SpreadBet.Common.Components
 															   "<span[^>]*?class\\s?=\\s?[\\\"\\']lookup-one[\\\"\\'][^>]*?>[^<]*?" + 
 															   "<a[^>]*?href\\s?=\\s?[\\\"\\'](?<url>share_prices/share_price[^\\\"\\']*)")
 								.OfType<Match>()
-								.Select(match => new Uri(baseUrl, match.Groups["url"].Value.Trim()).PathAndQuery);
+								.Select(match => new Uri(baseUrl, match.Groups["url"].Value.Trim()).OriginalString);
 
 					retVal.AddRange(urls);
 				}
@@ -155,12 +155,12 @@ namespace SpreadBet.Common.Components
 			var mid = Regex.Match(content, midExp).Groups["val"].Value;
 
 			var valExp = "(?ismx)" +
-						 "<th[^>]*?>[^<]*?security[^<]*?</\\s?th>[^<]*?" + 
+						 "<th[^>]*?>[^<]*?{0}[^<]*?</\\s?th>[^<]*?" + 
 						 "<td[^>]*?>\\s*(?:<a[^>]*?>)?(?<value>.*?)\\s*</\\s?(?:a|td)>";
 
-			var bid = Regex.Match(content, string.Format(valExp, "bid")).Groups["val"].Value;
-			var offer = Regex.Match(content, string.Format(valExp, "offer")).Groups["val"].Value;
-			var security = Regex.Match(content, string.Format(valExp, "security")).Groups["val"].Value;
+			var bid = Regex.Match(content, string.Format(valExp, "bid")).Groups["value"].Value;
+			var offer = Regex.Match(content, string.Format(valExp, "offer")).Groups["value"].Value;
+			var security = Regex.Match(content, string.Format(valExp, "security")).Groups["value"].Value;
 
 			return new StockPrice
 			{
