@@ -2,18 +2,20 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{FFDDFAF8-F5CA-44F6-A7ED-4183DD12B96A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpreadBet.Common</RootNamespace>
-    <AssemblyName>SpreadBet.Common</AssemblyName>
+    <RootNamespace>SpreadBet.WindowsService</RootNamespace>
+    <AssemblyName>SpreadBet.WindowsService</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,7 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CuttingEdge.Conditions">
-      <HintPath>..\packages\CuttingEdge.Conditions.1.2.0.0\lib\NET35\CuttingEdge.Conditions.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -50,39 +50,31 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\CompositeStockFilter.cs" />
-    <Compile Include="Components\ConsistentChangeStockFilter.cs" />
-    <Compile Include="Components\ExistingStockRemovalFilter.cs" />
-    <Compile Include="Components\DecisionByGrowthAndCurrentPosition.cs" />
-    <Compile Include="Components\HTTPScraper.cs" />
-    <Compile Include="Components\LiveCharts_co_uk_PriceFeed.cs" />
-    <Compile Include="Components\MinimumRateOfChangeStockFilter.cs" />
-    <Compile Include="Components\StockDataProvider.cs" />
-    <Compile Include="Entities\Account.cs" />
-    <Compile Include="Entities\Bet.cs" />
-    <Compile Include="Entities\Period.cs" />
-    <Compile Include="Entities\Price.cs" />
-    <Compile Include="Entities\ScrapeInfo.cs" />
-    <Compile Include="Entities\Stock.cs" />
-    <Compile Include="Entities\StockPrice.cs" />
-    <Compile Include="Entities\StockPriceHistory.cs" />
-    <Compile Include="Helpers\TimePeriodHelper.cs" />
-    <Compile Include="Helpers\UnityHelper.cs" />
-    <Compile Include="Interfaces\IExecutableApplication.cs" />
-    <Compile Include="Interfaces\IInvestDecider.cs" />
-    <Compile Include="Interfaces\IAccountDataProvider.cs" />
-    <Compile Include="Interfaces\IPortfolioDataProvider.cs" />
-    <Compile Include="Interfaces\IScraper.cs" />
-    <Compile Include="Interfaces\IStockDataProvider.cs" />
-    <Compile Include="Interfaces\IStockFilter.cs" />
-    <Compile Include="Interfaces\IStockHistoryDataProvider.cs" />
-    <Compile Include="Interfaces\IStockPriceProvider.cs" />
+    <Compile Include="SpreadBet.WindowsService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SpreadBet.WindowsService.Designer.cs">
+      <DependentUpon>SpreadBet.WindowsService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
+      <Project>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</Project>
+      <Name>SpreadBet.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Scheduler\SpreadBet.Scheduler.csproj">
+      <Project>{58D484FA-CE7F-4DDC-9F78-FD3DF849FAB4}</Project>
+      <Name>SpreadBet.Scheduler</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

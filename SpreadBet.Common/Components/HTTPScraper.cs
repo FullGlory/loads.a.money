@@ -17,14 +17,14 @@ namespace SpreadBet.Common.Components
 	using SpreadBet.Common.Interfaces;
 	using SpreadBet.Common.Entities;
 
-	public class DefaultScraper : IScraper
+	public class HTTPScraper : IScraper
 	{
 		private const string __USERAGENT = "Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63 Safari/534.3";
 
 		private CookieContainer _cookieContainer = null;
 		private long _proxyIndex = 0;
 
-		public DefaultScraper()
+		public HTTPScraper()
 		{
 			this._cookieContainer = new CookieContainer();
 		}
@@ -138,7 +138,7 @@ namespace SpreadBet.Common.Components
 			{
 				retVal = (HttpWebResponse)wex.Response;
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				retVal = null;
 			}

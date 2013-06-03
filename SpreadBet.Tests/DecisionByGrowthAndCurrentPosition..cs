@@ -105,17 +105,17 @@ namespace SpreadBet.Tests
 
 			// We are willing to bet up to £100 per point, but only willing to loose £200, Also we accept that up to 75% of this loss can be because of the spread
 
-			// GIVEN that our position is that the price will increase 
-			// AND that the BID price is 37.23 
-			// AND the SPREAD is 14 points
+			// GIVEN that our position is that the price will decrease 
+			// AND that the OFFER price is 23.23 
+			// AND the SPREAD is 4 points
 			// WHEN we are willing to loose up to £150.00 on the spread
-			// THEN the maximum bid we can afford to place is 150 / 14 = £10.70 (£10.00 giving an initial loss of £140.00)
+			// THEN the maximum bid we can afford to place is 150 / 4 = £37.23 (£37.00 giving an initial loss of £140.00)
 
-			// GIVEN that our position is that the price will increase
-			// AND that our bid amount is £10.00 per point
+			// GIVEN that our position is that the price will decrease
+			// AND that our bid amount is £37.00 per point
 			// AND the maximum amount that we are willing to loose is £200.00
-			// WHEN the BID price is 37.23
-			// THEN the exit price will be 37.23 - (200 / 10) = 17.23
+			// WHEN the OFFER price is 23.23
+			// THEN the exit price will be 23.23 + (200 / 10) = 28.64
 
 			var decisionMaker = new DecisionByGrowthAndCurrentPosition(stockHistoryProvider.Object, accountDataProvider.Object, 5, 100m, 200m, .75m);
 			var bets = decisionMaker.GetInvestmentDescisions(new Stock[] { stock });

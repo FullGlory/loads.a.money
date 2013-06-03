@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SpreadBet")]
+[assembly: AssemblyTitle("SpreadBet.WindowsService")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SpreadBet")]
+[assembly: AssemblyProduct("SpreadBet.WindowsService")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5b0baa3c-1b10-4f73-8707-bdbd9075946c")]
+[assembly: Guid("971323fb-5943-4c8a-a4c0-dcdb7a7ce7cc")]
 
 // Version information for an assembly consists of the following four values:
 //

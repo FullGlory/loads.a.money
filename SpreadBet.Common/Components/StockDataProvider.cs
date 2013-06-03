@@ -1,22 +1,25 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IStockPriceProvider.cs" company="">
+// <copyright file="StockDataProvider.cs" company="">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace SpreadBet.Common.Interfaces
+namespace SpreadBet.Common.Components
 {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text;
-	using SpreadBet.Common.Entities;
+	using SpreadBet.Common.Interfaces;
 
 	/// <summary>
 	/// TODO: Update summary.
 	/// </summary>
-	public interface IStockPriceProvider
+	public class StockDataProvider: IStockDataProvider
 	{
-		IEnumerable<StockPrice> GetStockPrices();
+		public void SaveStockData(IEnumerable<Entities.StockPrice> stockPrice)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -75,6 +75,8 @@ namespace SpreadBet.Common.Components
 
 			Parallel.ForEach<string>(GetPageUrls(), url =>
 			{
+				Console.WriteLine("crawling url " + url);
+
 				var stock = ReadStockPrices(url, timePeriod);
 
 				if (stock != null)
@@ -93,15 +95,22 @@ namespace SpreadBet.Common.Components
 		{
 			var retVal = new List<string>();
 
+			var baseUrl = new Uri("http://www.livecharts.co.uk/");
+
 			Parallel.ForEach(this._listUrls, url => 
 			{
+				Console.WriteLine("getting stock urls for " + url);
+
 				var response = this._scraper.Scrape(url);
 				if (response.Success)
 				{
-					retVal.AddRange(
-						Regex.Matches(response.Content, "(?ismx)<a[^>]*?href\\s?=\\s?[\\\"\\'](?<url>share_prices/[^\\\"\\']*)")
-						.OfType<Match>()
-						.Select(match => match.Groups["url"].Value.Trim()));
+					var urls = Regex.Matches(response.Content, "(?ismx)" + 
+															   "<span[^>]*?class\\s?=\\s?[\\\"\\']lookup-one[\\\"\\'][^>]*?>[^<]*?" + 
+															   "<a[^>]*?href\\s?=\\s?[\\\"\\'](?<url>share_prices/share_price[^\\\"\\']*)")
+								.OfType<Match>()
+								.Select(match => new Uri(baseUrl, match.Groups["url"].Value.Trim()).PathAndQuery);
+
+					retVal.AddRange(urls);
 				}
 			});
 

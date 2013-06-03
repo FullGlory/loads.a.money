@@ -13,6 +13,6 @@ namespace SpreadBet.Common.Interfaces
 
 	public interface IExecutableApplication
 	{
-		void Execute();
+		void Run();
 	}
 }
