@@ -7,6 +7,7 @@ using SpreadBet.Common.Entities;
 using SpreadBet.Common.Interfaces;
 using Moq;
 using SpreadBet.Common.Components;
+using SpreadBet.Domain;
 
 namespace SpreadBet.Tests
 {
@@ -18,7 +19,7 @@ namespace SpreadBet.Tests
 		{
 			var stock = new Stock
 				{
-					Id = "STK.PLC",
+                    Identifier = "STK.PLC",
 					Name = "STOCK PLC",
 					Description = "The Test Stock Price"
 				};
@@ -76,7 +77,7 @@ namespace SpreadBet.Tests
 		{
 			var stock = new Stock
 			{
-				Id = "STK.PLC",
+                Identifier = "STK.PLC",
 				Name = "STOCK PLC",
 				Description = "The Test Stock Price"
 			};

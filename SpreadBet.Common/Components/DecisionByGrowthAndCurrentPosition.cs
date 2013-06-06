@@ -14,6 +14,7 @@ namespace SpreadBet.Common.Components
 	using CuttingEdge.Conditions;
 	using System.Threading.Tasks;
 	using SpreadBet.Common.Entities;
+    using SpreadBet.Domain;
 
 	/// <summary>
 	/// TODO: Update summary.
@@ -75,12 +76,12 @@ namespace SpreadBet.Common.Components
 			this._spreadLossRation = spreadLossRatio;
 		}
 
-		public IEnumerable<Entities.Bet> GetInvestmentDescisions(IEnumerable<Entities.Stock> stocks)
+		public IEnumerable<Bet> GetInvestmentDescisions(IEnumerable<Stock> stocks)
 		{
 			var retVal = new List<Bet>();
 			var analysis = new List<StockAnalysis>();
 
-			Action<Entities.Stock> performAnalysis = (Stock stock) =>
+			Action<Stock> performAnalysis = (Stock stock) =>
 			{
 				var stockHistory = this._stockHistoryProvider.GetStockHistory(stock, this._periods);
 				if ((stockHistory != null) &&

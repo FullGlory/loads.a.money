@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SpreadBet.Common.Interfaces;
 using CuttingEdge.Conditions;
+using SpreadBet.Repository;
 
 namespace SpreadBet.Application
 {
@@ -34,5 +35,6 @@ namespace SpreadBet.Application
 			var stockPrices = this._priceProvider.GetStockPrices();
 			this._stockDataProvider.SaveStockData(stockPrices);
 		}
+
 	}
 }

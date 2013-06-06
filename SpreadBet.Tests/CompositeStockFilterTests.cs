@@ -7,6 +7,7 @@ using Moq;
 using SpreadBet.Common.Entities;
 using SpreadBet.Common.Interfaces;
 using SpreadBet.Common.Components;
+using SpreadBet.Domain;
 
 namespace SpreadBet.Tests
 {
@@ -18,8 +19,8 @@ namespace SpreadBet.Tests
 		{
 			var stocks = new Stock[]
 			{
-				new Stock { Id = "STK.1" }, 
-				new Stock { Id = "STK.2" }, 
+				new Stock { Identifier = "STK.1" }, 
+				new Stock { Identifier = "STK.2" }, 
 			};
 
 			var filter1 = new Mock<IStockFilter>();

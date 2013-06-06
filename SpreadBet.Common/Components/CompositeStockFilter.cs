@@ -12,6 +12,7 @@ namespace SpreadBet.Common.Components
 	using System.Text;
 	using SpreadBet.Common.Interfaces;
 	using CuttingEdge.Conditions;
+    using SpreadBet.Domain;
 
 	public class CompositeStockFilter: IStockFilter
 	{
@@ -26,14 +27,14 @@ namespace SpreadBet.Common.Components
 			this._filters = new List<IStockFilter>(filters);
 		}
 		
-		public IEnumerable<Entities.Stock> GetInvestmentCandidates(IEnumerable<Entities.Stock> stocks)
+		public IEnumerable<Stock> GetInvestmentCandidates(IEnumerable<Stock> stocks)
 		{
-			var stockList = new List<Entities.Stock>(stocks);
+			var stockList = new List<Stock>(stocks);
 
 			this._filters.ForEach(x =>
 			{
 				var filteredStockList = x.GetInvestmentCandidates(stockList);
-				stockList = new List<Entities.Stock>(filteredStockList);
+				stockList = new List<Stock>(filteredStockList);
 			});
 
 			return stockList;

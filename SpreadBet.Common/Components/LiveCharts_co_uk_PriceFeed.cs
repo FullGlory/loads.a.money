@@ -16,6 +16,8 @@ namespace SpreadBet.Common.Components
 	using SpreadBet.Common.Helpers;
 	using System.Threading.Tasks;
 	using CuttingEdge.Conditions;
+    using SpreadBet.Domain;
+    using SpreadBet.Repository;
 
 	/// <summary>
 	/// TODO: Update summary.
@@ -24,11 +26,15 @@ namespace SpreadBet.Common.Components
 	{
 		private readonly List<string> _listUrls;
 		private readonly IScraper _scraper;
+        private readonly IRepository _repository;
 
-		public LiveCharts_co_uk_PriceFeed(IScraper scraper)
+		public LiveCharts_co_uk_PriceFeed(IScraper scraper, IRepository repository)
 		{
+            // FOR FUCKS SAKE!!!!!
 			Condition.Requires(scraper).IsNotNull();
+            Condition.Requires(repository).IsNotNull();
 
+            this._repository = repository;
 			this._scraper = scraper;
 				
 			#region Set starting urls
@@ -36,44 +42,44 @@ namespace SpreadBet.Common.Components
 			this._listUrls = new string[]
 			{
 				"http://www.livecharts.co.uk/share_map.php?letter=0-9", 
-				"http://www.livecharts.co.uk/share_map.php?letter=a", 
-				"http://www.livecharts.co.uk/share_map.php?letter=b", 
-				"http://www.livecharts.co.uk/share_map.php?letter=c", 
-				"http://www.livecharts.co.uk/share_map.php?letter=d", 
-				"http://www.livecharts.co.uk/share_map.php?letter=e", 
-				"http://www.livecharts.co.uk/share_map.php?letter=f", 
-				"http://www.livecharts.co.uk/share_map.php?letter=g", 
-				"http://www.livecharts.co.uk/share_map.php?letter=h", 
-				"http://www.livecharts.co.uk/share_map.php?letter=i", 
-				"http://www.livecharts.co.uk/share_map.php?letter=j", 
-				"http://www.livecharts.co.uk/share_map.php?letter=k", 
-				"http://www.livecharts.co.uk/share_map.php?letter=l", 
-				"http://www.livecharts.co.uk/share_map.php?letter=m", 
-				"http://www.livecharts.co.uk/share_map.php?letter=n", 
-				"http://www.livecharts.co.uk/share_map.php?letter=o", 
-				"http://www.livecharts.co.uk/share_map.php?letter=p", 
-				"http://www.livecharts.co.uk/share_map.php?letter=q", 
-				"http://www.livecharts.co.uk/share_map.php?letter=r", 
-				"http://www.livecharts.co.uk/share_map.php?letter=s",
-				"http://www.livecharts.co.uk/share_map.php?letter=t", 
-				"http://www.livecharts.co.uk/share_map.php?letter=u", 
-				"http://www.livecharts.co.uk/share_map.php?letter=v", 
-				"http://www.livecharts.co.uk/share_map.php?letter=w", 
-				"http://www.livecharts.co.uk/share_map.php?letter=x",
-				"http://www.livecharts.co.uk/share_map.php?letter=y",
-				"http://www.livecharts.co.uk/share_map.php?letter=z" 
+                //"http://www.livecharts.co.uk/share_map.php?letter=a", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=b", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=c", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=d", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=e", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=f", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=g", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=h", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=i", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=j", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=k", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=l", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=m", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=n", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=o", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=p", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=q", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=r", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=s",
+                //"http://www.livecharts.co.uk/share_map.php?letter=t", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=u", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=v", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=w", 
+                //"http://www.livecharts.co.uk/share_map.php?letter=x",
+                //"http://www.livecharts.co.uk/share_map.php?letter=y",
+                //"http://www.livecharts.co.uk/share_map.php?letter=z" 
 			}.ToList<string>();
 
 			#endregion
 		}
 
-		public IEnumerable<Entities.StockPrice> GetStockPrices()
+		public IEnumerable<StockPrice> GetStockPrices()
 		{
 			var timePeriod = TimePeriodHelper.GetTimePeriod(DateTime.UtcNow);
 
 			var stockPrices = new List<StockPrice>();
 
-			Parallel.ForEach<string>(GetPageUrls(), url =>
+			Parallel.ForEach<string>(GetPageUrls(), (url, state)  =>
 			{
 				Console.WriteLine("crawling url " + url);
 
@@ -86,6 +92,8 @@ namespace SpreadBet.Common.Components
 						stockPrices.Add(stock);
 					}
 				}
+
+                if (stockPrices.Count >= 30) state.Break();
 			});
 
 			return stockPrices;
@@ -161,17 +169,20 @@ namespace SpreadBet.Common.Components
 			var bid = Regex.Match(content, string.Format(valExp, "bid")).Groups["value"].Value;
 			var offer = Regex.Match(content, string.Format(valExp, "offer")).Groups["value"].Value;
 			var security = Regex.Match(content, string.Format(valExp, "security")).Groups["value"].Value;
+            var newPeriod = new Period();
+            newPeriod.Id = timePeriod;
+            newPeriod.From = DateTime.Now;
+            newPeriod.To = DateTime.Now.AddHours(1);
 
-			return new StockPrice
+            var stock = _repository.GetAll<Stock>().SingleOrDefault(x => x.Identifier.Equals(symb));
+            if (stock == null)
+                stock = new Stock { Identifier = symb, Name = name, Security = security };
+			
+            return new StockPrice
 			{
-				PeriodId = timePeriod,
+				Period = newPeriod,
 				UpdatedAt = DateTime.UtcNow,
-				Stock = new Stock
-				{
-					Id = symb,
-					Name = name, 
-					Security = security
-				},
+                Stock = stock,
 				Price = new Price
 				{
 					Mid = decimal.Parse(mid), 

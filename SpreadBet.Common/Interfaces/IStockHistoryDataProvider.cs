@@ -11,6 +11,7 @@ namespace SpreadBet.Common.Interfaces
 	using System.Linq;
 	using System.Text;
 	using SpreadBet.Common.Entities;
+    using SpreadBet.Domain;
 
 	public interface IStockHistoryDataProvider
 	{

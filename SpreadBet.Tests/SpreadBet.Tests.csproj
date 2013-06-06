@@ -64,6 +64,10 @@
       <Project>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</Project>
       <Name>SpreadBet.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
+      <Project>{70BF6160-D9BA-40DC-8982-3BE574C30F17}</Project>
+      <Name>SpreadBet.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

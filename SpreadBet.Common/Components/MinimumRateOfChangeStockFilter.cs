@@ -13,6 +13,7 @@ namespace SpreadBet.Common.Components
 	using SpreadBet.Common.Interfaces;
 	using CuttingEdge.Conditions;
 	using System.Threading.Tasks;
+    using SpreadBet.Domain;
 
 	/// <summary>
 	/// TODO: Update summary.
@@ -49,11 +50,11 @@ namespace SpreadBet.Common.Components
 		/// </summary>
 		/// <param name="stocks">The stocks.</param>
 		/// <returns></returns>
-		public IEnumerable<Entities.Stock> GetInvestmentCandidates(IEnumerable<Entities.Stock> stocks)
+		public IEnumerable<Stock> GetInvestmentCandidates(IEnumerable<Stock> stocks)
 		{
-			var retVal = new List<Entities.Stock>();
+			var retVal = new List<Stock>();
 
-			Func<Entities.Stock, bool> assessSuitability = (Entities.Stock stock) =>
+			Func<Stock, bool> assessSuitability = (Stock stock) =>
 			{
 				var stockHistory = this._stockHistoryProvider.GetStockHistory(stock, this._periods);
 				if ((stockHistory != null) && 
