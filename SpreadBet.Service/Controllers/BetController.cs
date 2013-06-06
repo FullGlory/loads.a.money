@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web.Http;
 using SpreadBet.Domain;
 using SpreadBet.Repository;
+using System.Linq;
 
 namespace SpreadBet.Service.Controllers
 {
@@ -17,7 +18,8 @@ namespace SpreadBet.Service.Controllers
         }
 
         // GET api/bet
-        public IEnumerable<Bet> Get()
+        [Queryable]
+        public IQueryable<Bet> Get()
         {
             var list = _repository.GetAll<Bet>();
             if (list != null) return list;
