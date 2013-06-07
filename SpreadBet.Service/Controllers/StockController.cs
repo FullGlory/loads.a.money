@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using SpreadBet.Domain;
 using SpreadBet.Repository;
 using System.Net.Http;
 using System.Net;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace SpreadBet.Service.Controllers
 {
@@ -18,8 +17,7 @@ namespace SpreadBet.Service.Controllers
         }
 
         // GET: api/Stock/
-        [Queryable]
-        public IQueryable<Stock> Get()
+        public IEnumerable<Stock> Get()
         {
             var list = _repository.GetAll<Stock>();
             if (list != null) return list;
