@@ -14,33 +14,34 @@ namespace SpreadBet.Repository
 
         }
 
-        public DbSet<Account> Account { get; set; }
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Bet> Bets { get; set; }
-        public DbSet<Period> Period { get; set; }
+        public DbSet<Period> Periods { get; set; }
+        public DbSet<StockPrice> StockPrices { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-			ConfigureModel(modelBuilder);
+			//ConfigureModel(modelBuilder);
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<Context, Configuration>());
 
 			base.OnModelCreating(modelBuilder);
 		}
 
-		private void ConfigureModel(DbModelBuilder modelBuilder)
-		{
-			var entityMethod = typeof(DbModelBuilder).GetMethod("Entity");
+        //private void ConfigureModel(DbModelBuilder modelBuilder)
+        //{
+        //    var entityMethod = typeof(DbModelBuilder).GetMethod("Entity");
 
-			var entityTypes = Assembly.GetAssembly(typeof(Entity)).GetTypes()
-				.Where(x => x.IsSubclassOf(typeof(Entity)) && !x.IsAbstract);
-			foreach (var type in entityTypes)
-			{
-				entityMethod.MakeGenericMethod(type).Invoke(modelBuilder, new object[] { });
-			}
-		}
+        //    var entityTypes = Assembly.GetAssembly(typeof(Entity)).GetTypes()
+        //        .Where(x => x.IsSubclassOf(typeof(Entity)) && !x.IsAbstract);
+        //    foreach (var type in entityTypes)
+        //    {
+        //        entityMethod.MakeGenericMethod(type).Invoke(modelBuilder, new object[] { });
+        //    }
+        //}
 	}
 }

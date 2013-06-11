@@ -18,18 +18,13 @@ namespace SpreadBet.Scheduler
 	public class Scheduler : IScheduler
 	{
 		private readonly List<SchedulerItem> _schedulerItems;
-		private readonly Int32 _pollingIntervalSecs;
 		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Scheduler"/> class.
 		/// </summary>
-		/// <param name="logger">The logger.</param>
-		public Scheduler(int pollingIntervalSecs)
+		public Scheduler()
 		{
-			Condition.Requires(pollingIntervalSecs).IsGreaterThan(0);
-
 			this._schedulerItems = new List<SchedulerItem>();
-			this._pollingIntervalSecs = pollingIntervalSecs;
 		}
 
 		/// <summary>

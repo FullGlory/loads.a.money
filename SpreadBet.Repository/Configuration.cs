@@ -13,7 +13,7 @@ namespace SpreadBet.Repository
 
         protected override void Seed(Context context)
         {
-            context.Account.Add(new Account { Username = "jpcgoodby", Password = "password", Url = "http://www.bullbearings.co.uk/login.php", Deposit = 100000 }); 
+            context.Accounts.Add(new Account { Username = "jpcgoodby", Password = "password", Url = "http://www.bullbearings.co.uk/login.php", Deposit = 100000 }); 
         }
 
     }
