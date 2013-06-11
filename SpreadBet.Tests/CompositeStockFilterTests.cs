@@ -41,8 +41,8 @@ namespace SpreadBet.Tests
 			filter3.Verify(x => x.GetInvestmentCandidates(stocks), Times.Once());
 
 			Assert.AreEqual(2, stocks.Count());
-			Assert.IsTrue(stocks.Any(x => x.Id.Equals("STK.1")));
-			Assert.IsTrue(stocks.Any(x => x.Id.Equals("STK.2")));
+            Assert.IsTrue(stocks.Any(x => x.Identifier.Equals("STK.1")));
+            Assert.IsTrue(stocks.Any(x => x.Identifier.Equals("STK.2")));
 		}
 	}
 }

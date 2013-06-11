@@ -46,7 +46,7 @@ namespace SpreadBet.Common.Components
 
 			Parallel.ForEach(stocks, stock =>
 			{
-				if (!existingStocks.Any(bet => bet.Stock.Id.Equals(stock.Id)))
+				if (!existingStocks.Any(bet => bet.Stock.Identifier.Equals(stock.Identifier)))
 				{
 					retVal.Add(stock);
 				}

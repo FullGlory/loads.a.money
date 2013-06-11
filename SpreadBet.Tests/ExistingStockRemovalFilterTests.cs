@@ -73,7 +73,7 @@ namespace SpreadBet.Tests
 			var retVal = filter.GetInvestmentCandidates(stocks);
 
 			Assert.AreEqual(1, retVal.Count());
-			Assert.IsTrue(retVal.Any(x => x.Id.Equals("STK.PLC")));
+			Assert.IsTrue(retVal.Any(x => x.Identifier.Equals(stock.Identifier)));
 
 			portfolioProvider.Verify(x => x.GetExistingBets(), Times.Once());
 		}
