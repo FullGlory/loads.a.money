@@ -14,7 +14,7 @@ namespace SpreadBet.Console
 	{
 		static void Main(string[] args)
 		{
-			var container = UnityHelper.GetContainer();
+			var	container = args.Any() ? UnityHelper.GetContainer(args.First()) : UnityHelper.GetContainer();
 			var application = container.Resolve<IExecutableApplication>();
 
             ResolveDatabase();

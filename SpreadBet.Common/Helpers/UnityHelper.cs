@@ -22,6 +22,26 @@ namespace SpreadBet.Common.Helpers
 		private static readonly object keylock = new object();
 		private static IUnityContainer _container = null;
 
+		// <summary>
+		/// Gets the container instance.
+		/// </summary>
+		/// <returns>The container</returns>
+		public static IUnityContainer GetContainer(string containerName)
+		{
+			lock (keylock)
+			{
+				if (_container == null)
+				{
+					var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
+					_container = new UnityContainer();
+
+					section.Configure(_container, containerName);
+				} 
+			}
+
+			return _container;
+		}
+
 		/// <summary>
 		/// Gets the container instance.
 		/// </summary>
@@ -30,24 +50,18 @@ namespace SpreadBet.Common.Helpers
 		{
 			lock (keylock)
 			{
-				if (_container == null)
+				var defaultContainer = ConfigurationManager.AppSettings["defaultApplicationName"];
+				if (!string.IsNullOrEmpty(defaultContainer))
 				{
-					ConfigureContainer();
+					return GetContainer(defaultContainer);
+				}
+				else
+				{
+					throw new ArgumentException("Please specify the application name on the command line, or a valid default application in through configuration");
 				}
 			}
 
-			return _container;
-		}
-
-		/// <summary>
-		/// Configures the container.
-		/// </summary>
-		private static void ConfigureContainer()
-		{
-			var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
-			_container = new UnityContainer();
-
-			section.Configure(_container);
+			return null;
 		}
 	}
 }

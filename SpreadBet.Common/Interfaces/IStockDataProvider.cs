@@ -19,5 +19,6 @@ namespace SpreadBet.Common.Interfaces
 	public interface IStockDataProvider
 	{
 		void SaveStockData(IEnumerable<StockPrice> stockPrice);
+		IEnumerable<Stock> GetStocks();
 	}
 }

@@ -68,15 +68,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DataProviders\AccountDataProvider.cs" />
     <Compile Include="Components\BetController.cs" />
     <Compile Include="Components\CompositeStockFilter.cs" />
     <Compile Include="Components\ConsistentChangeStockFilter.cs" />
+    <Compile Include="Components\DataProviders\PortfolioDataProvider.cs" />
     <Compile Include="Components\ExistingStockRemovalFilter.cs" />
     <Compile Include="Components\DecisionByGrowthAndCurrentPosition.cs" />
     <Compile Include="Components\HTTPScraper.cs" />
     <Compile Include="Components\LiveCharts_co_uk_PriceFeed.cs" />
     <Compile Include="Components\MinimumRateOfChangeStockFilter.cs" />
-    <Compile Include="Components\StockDataProvider.cs" />
+    <Compile Include="Components\DataProviders\StockDataProvider.cs" />
+    <Compile Include="Components\DataProviders\StockHistoryDataProvider.cs" />
     <Compile Include="Entities\ScrapeInfo.cs" />
     <Compile Include="Entities\StockPriceHistory.cs" />
     <Compile Include="Helpers\TimePeriodHelper.cs" />
