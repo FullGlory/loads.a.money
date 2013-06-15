@@ -68,8 +68,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\BullBearingsController.cs" />
     <Compile Include="Components\DataProviders\AccountDataProvider.cs" />
-    <Compile Include="Components\BetController.cs" />
     <Compile Include="Components\CompositeStockFilter.cs" />
     <Compile Include="Components\ConsistentChangeStockFilter.cs" />
     <Compile Include="Components\DataProviders\PortfolioDataProvider.cs" />

@@ -6,12 +6,12 @@ using System.Text;
 
 namespace SpreadBet.Common.Components
 {
-    public class BetController : IBetController
+    public class BullBearingsController : IBetController
     {
         private PhantomJSDriver _driver;
         private IJavaScriptExecutor _jsExecutor;
 
-        public BetController()
+        public BullBearingsController()
         {
             var configOptions = new PhantomJSOptions();
             configOptions.AddAdditionalCapability("--webdriver", 9999);
@@ -77,7 +77,6 @@ namespace SpreadBet.Common.Components
             _jsExecutor.ExecuteScript("$('#login #password').val('" + account.Password + "')");
             _jsExecutor.ExecuteScript("$('#login').submit()");
 
-            System.IO.File.WriteAllText(@"c:\temp\Login.html", _driver.PageSource);
             return true;
         }
 
