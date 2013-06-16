@@ -13,6 +13,7 @@ namespace SpreadBet.Common.Components
 	using SpreadBet.Common.Interfaces;
 	using SpreadBet.Repository;
 	using CuttingEdge.Conditions;
+    using SpreadBet.Domain;
 
 	/// <summary>
 	/// TODO: Update summary.
@@ -34,8 +35,8 @@ namespace SpreadBet.Common.Components
 		/// <returns></returns>
 		public Domain.Account GetCurrentPosition()
 		{
-			//TODO: needs implementing.
-			return new Domain.Account();
+            return this._repository.GetAll<Account>()
+                                   .Last();
 		}
 	}
 }

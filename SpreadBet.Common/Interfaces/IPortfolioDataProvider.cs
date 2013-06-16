@@ -16,5 +16,9 @@ namespace SpreadBet.Common.Interfaces
 	public interface IPortfolioDataProvider
 	{
 		IEnumerable<Bet> GetExistingBets();
-	}
+
+        void SaveBet(Bet bet);
+
+        IEnumerable<Bet> GetUnplacedBets();
+    }
 }

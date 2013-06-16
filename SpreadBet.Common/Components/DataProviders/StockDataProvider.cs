@@ -26,23 +26,18 @@ namespace SpreadBet.Common.Components
             _repository = repository;
         }
 
-		public void SaveStockData(IEnumerable<StockPrice> stockPrice)
-		{
-            foreach(var sp in stockPrice)
-            {
-                // JC - you don't need these 3 updates as the StockPrice is the "aggregate root" 
-                // and so will save all the associated entities
-                // TODO - should this be done in a tx as a batch is being updated...maybe the Unit Of Work pattern here??
-                //_repository.SaveOrUpdate<Period>(sp.Period);
-                //_repository.SaveOrUpdate<Stock>(sp.Stock);
-                //_repository.SaveOrUpdate<Price>(sp.Price);
-                _repository.SaveOrUpdate<StockPrice>(sp);
-            }
-		}
-
 		public IEnumerable<Stock> GetStocks()
 		{
 			return _repository.GetAll<Stock>();
 		}
+
+        public void SaveStockData(IEnumerable<StockPrice> stockPrice)
+        {
+            foreach (var sp in stockPrice)
+            {
+                // TODO - should this be done in a tx as a batch is being updated...maybe the Unit Of Work pattern here??
+                _repository.SaveOrUpdate<StockPrice>(sp);
+            }
+        }
 	}
 }

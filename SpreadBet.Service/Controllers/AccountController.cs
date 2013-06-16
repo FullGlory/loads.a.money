@@ -30,7 +30,7 @@ namespace SpreadBet.Service.Controllers
         // GET api/account/5
         public Account Get(int id)
         {
-            var item = _repository.Get<Account>(id);
+            var item = _repository.Get<Account>(a=>a.Id.Equals(id));
             if (item != null) return item;
             throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
         }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
+using Microsoft.Practices.Unity;
 using SpreadBet.Common.Helpers;
 using SpreadBet.Common.Interfaces;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
-using SpreadBet.Repository;
 
 namespace SpreadBet.Console
 {
@@ -15,16 +10,10 @@ namespace SpreadBet.Console
 		static void Main(string[] args)
 		{
 			var	container = args.Any() ? UnityHelper.GetContainer(args.First()) : UnityHelper.GetContainer();
-			var application = container.Resolve<IExecutableApplication>();
+			
+            var application = container.Resolve<IExecutableApplication>();
 
-            ResolveDatabase();
 			application.Run();
 		}
-
-        private static void ResolveDatabase()
-        {
-            var initialise = new DatabaseInitializer(new Context());
-
-        }
 	}
 }

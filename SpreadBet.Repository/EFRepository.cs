@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using SpreadBet.Domain;
 
 namespace SpreadBet.Repository
@@ -18,17 +20,37 @@ namespace SpreadBet.Repository
 			_context = context;
 		}
 
-		public T Get<T>(int id) where T : Entity
+        public T Get<T>(Expression<Func<T, bool>> where) where T : Entity
+        {
+            return GetDbSet<T>().Where(where).SingleOrDefault();
+        }
+
+		public IEnumerable<T> GetAll<T>() where T : Entity
 		{
-			return GetDbSet<T>().Find(id);
+			return GetDbSet<T>().ToList();
 		}
 
-		public IQueryable<T> GetAll<T>() where T : Entity
-		{
-			return GetDbSet<T>();
-		}
+        public IEnumerable<T> GetAll<T>(params Expression<Func<T, object>>[] includeProperties) where T : Entity
+        {
+            IQueryable<T> queryable = GetDbSet<T>();
+            foreach (Expression<Func<T, object>> includeProperty in includeProperties)
+            {
+                queryable = queryable.Include<T, object>(includeProperty);
+            }
+            return queryable.ToList();
+        }
 
-		public void SaveOrUpdate<T>(T entity) where T : Entity
+        public IEnumerable<T> GetAll<T>(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] includeProperties) where T : Entity
+        {
+            IQueryable<T> queryable = GetDbSet<T>().Where(where);
+            foreach (Expression<Func<T, object>> includeProperty in includeProperties) 
+            { 
+                queryable = queryable.Include<T, object>(includeProperty); 
+            } 
+            return queryable.ToList();
+        }
+
+        public void SaveOrUpdate<T>(T entity) where T : Entity
 		{
 			if (_context.Entry(entity).State == EntityState.Detached)
 			{
@@ -61,5 +83,5 @@ namespace SpreadBet.Repository
 				_context = null;
 			}
 		}
-	}
+    }
 }

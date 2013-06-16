@@ -80,6 +80,7 @@
     <Compile Include="Components\MinimumRateOfChangeStockFilter.cs" />
     <Compile Include="Components\DataProviders\StockDataProvider.cs" />
     <Compile Include="Components\DataProviders\StockHistoryDataProvider.cs" />
+    <Compile Include="Components\WebDriverExtensions.cs" />
     <Compile Include="Entities\ScrapeInfo.cs" />
     <Compile Include="Entities\StockPriceHistory.cs" />
     <Compile Include="Helpers\TimePeriodHelper.cs" />

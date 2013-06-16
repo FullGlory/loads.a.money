@@ -27,7 +27,7 @@ namespace SpreadBet.Service.Controllers
         // GET api/bet/5
         public Bet Get(int id)
         {
-            var item = _repository.Get<Bet>(id);
+            var item = _repository.Get<Bet>(b => b.Id.Equals(id));
             if (item != null) return item;
             throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
         }

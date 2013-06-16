@@ -13,6 +13,7 @@ namespace SpreadBet.Common.Components
 	using SpreadBet.Common.Interfaces;
 	using SpreadBet.Repository;
 	using CuttingEdge.Conditions;
+    using SpreadBet.Domain;
 
 	/// <summary>
 	/// TODO: Update summary.
@@ -28,10 +29,24 @@ namespace SpreadBet.Common.Components
 			this._repository = repository;
 		}
 
-		public IEnumerable<Domain.Bet> GetExistingBets()
+		public IEnumerable<Bet> GetExistingBets()
 		{
-			// TODO: Need to implement this
-			return new List<Domain.Bet>();
+            return GetAllBets();
 		}
-	}
+
+        public IEnumerable<Bet> GetUnplacedBets()
+        {
+            return GetAllBets();
+        }
+
+        private IEnumerable<Bet> GetAllBets()
+        {
+            return this._repository.GetAll<Bet>(b => b.Stock);
+        }
+
+        public void SaveBet(Bet bet)
+        {
+            this._repository.SaveOrUpdate<Bet>(bet);
+        }
+    }
 }

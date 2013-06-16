@@ -41,7 +41,7 @@ namespace SpreadBet.Common.Components
 
 			this._listUrls = new string[]
 			{
-				"http://www.livecharts.co.uk/share_map.php?letter=0-9", 
+				//"http://www.livecharts.co.uk/share_map.php?letter=0-9", 
                 //"http://www.livecharts.co.uk/share_map.php?letter=a", 
                 //"http://www.livecharts.co.uk/share_map.php?letter=b", 
                 //"http://www.livecharts.co.uk/share_map.php?letter=c", 
@@ -67,7 +67,7 @@ namespace SpreadBet.Common.Components
                 //"http://www.livecharts.co.uk/share_map.php?letter=w", 
                 //"http://www.livecharts.co.uk/share_map.php?letter=x",
                 //"http://www.livecharts.co.uk/share_map.php?letter=y",
-                //"http://www.livecharts.co.uk/share_map.php?letter=z" 
+                "http://www.livecharts.co.uk/share_map.php?letter=z" 
 			}.ToList<string>();
 
 			#endregion
@@ -79,7 +79,8 @@ namespace SpreadBet.Common.Components
 
 			var stockPrices = new List<StockPrice>();
 
-			Parallel.ForEach<string>(GetPageUrls(), (url, state)  =>
+            //HACK - The intialisation of DbContext in EF is not thread-safe, so restrict parallelism (for now) !!
+			Parallel.ForEach<string>(GetPageUrls(), new ParallelOptions{MaxDegreeOfParallelism=1},(url, state)  =>
 			{
 				Console.WriteLine("crawling url " + url);
 
@@ -174,9 +175,11 @@ namespace SpreadBet.Common.Components
             newPeriod.From = DateTime.Now;
             newPeriod.To = DateTime.Now.AddHours(1);
 
-            var stock = _repository.GetAll<Stock>().SingleOrDefault(x => x.Identifier.Equals(symb));
+            var stock = _repository.Get<Stock>(s=>s.Identifier.Equals(symb));
             if (stock == null)
+            {
                 stock = new Stock { Identifier = symb, Name = name, Security = security };
+            }
 			
             return new StockPrice
 			{

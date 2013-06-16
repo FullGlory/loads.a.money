@@ -1,43 +1,46 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="StockHistoryDataProvider.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
+﻿using System.Collections.Generic;
+using System.Linq;
+using CuttingEdge.Conditions;
+using SpreadBet.Common.Entities;
+using SpreadBet.Common.Interfaces;
+using SpreadBet.Domain;
+using SpreadBet.Repository;
 
 namespace SpreadBet.Common.Components
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using SpreadBet.Common.Interfaces;
-	using SpreadBet.Repository;
-	using CuttingEdge.Conditions;
+    public class StockHistoryDataProvider : IStockHistoryDataProvider
+    {
+        private readonly IRepository _repository;
 
-	/// <summary>
-	/// TODO: Update summary.
-	/// </summary>
-	public class StockHistoryDataProvider: IStockHistoryDataProvider
-	{
-		private readonly IRepository _repository;
+        public StockHistoryDataProvider(IRepository repository)
+        {
+            Condition.Requires(repository).IsNotNull();
+            this._repository = repository;
+        }
 
-		public StockHistoryDataProvider(IRepository repository)
-		{
-			Condition.Requires(repository).IsNotNull();
+        public StockPriceHistory GetStockHistory(Stock stock)
+        {
+            return new StockPriceHistory
+            {
+                Stock = stock,
+                Prices = GetStockPricesForStock(stock).ToDictionary(sp => sp.Period, sp => sp.Price)
+            };
+        }
 
-			this._repository = repository;
-		}
+        public StockPriceHistory GetStockHistory(Stock stock, int periods)
+        {
+            return new StockPriceHistory
+            {
+                Stock = stock,
+                Prices = GetStockPricesForStock(stock).Take(periods)
+                                                      .ToDictionary(sp => sp.Period, sp => sp.Price)
+            };
+        }
 
-		public Entities.StockPriceHistory GetStockHistory(Domain.Stock stock)
-		{
-			// Not sure about this one
-			throw new NotImplementedException();
-		}
-
-		public Entities.StockPriceHistory GetStockHistory(Domain.Stock stock, int periods)
-		{
-			// Not sure about this one
-			throw new NotImplementedException();
-		}
-	}
+        private IEnumerable<StockPrice> GetStockPricesForStock(Stock stock)
+        {
+            return _repository.GetAll<StockPrice>(sp => sp.Stock.Identifier.Equals(stock.Identifier), sp=>sp.Period, sp=>sp.Price)
+                              .OrderBy(sp => sp.UpdatedAt);
+        }
+    }
 }
