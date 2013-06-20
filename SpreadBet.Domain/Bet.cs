@@ -22,6 +22,9 @@ namespace SpreadBet.Domain
 		public decimal BidAmount { get; set; }
 		public decimal OpeningPosition { get; set; }
 		public decimal ExitPrice { get; set; }
+
+		public DateTime? PlacedOn { get; set; }
+		public DateTime? ExitedOn { get; set; }
 		
 		public Direction Direction { get; set; }
 	}

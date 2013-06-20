@@ -48,5 +48,13 @@ namespace SpreadBet.Common.Components
         {
             this._repository.SaveOrUpdate<Bet>(bet);
         }
-    }
+		
+		public IEnumerable<Bet> GetCurrentBets()
+		{
+			// TODO Not sure about this tbh.
+			return this._repository.GetAll<Bet>(bet => 
+				(bet.PlacedOn ?? DateTime.MinValue) < DateTime.UtcNow && 
+				(bet.ExitedOn == null), b => b.Stock);
+		}
+	}
 }

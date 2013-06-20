@@ -20,5 +20,7 @@ namespace SpreadBet.Common.Interfaces
         void SaveBet(Bet bet);
 
         IEnumerable<Bet> GetUnplacedBets();
+
+		IEnumerable<Bet> GetCurrentBets();
     }
 }

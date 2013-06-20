@@ -76,6 +76,7 @@
     <Compile Include="Components\DataProviders\PortfolioDataProvider.cs" />
     <Compile Include="Components\ExistingStockRemovalFilter.cs" />
     <Compile Include="Components\DecisionByGrowthAndCurrentPosition.cs" />
+    <Compile Include="Components\ExitAfterInvestmentPeriod.cs" />
     <Compile Include="Components\HTTPScraper.cs" />
     <Compile Include="Components\LiveCharts_co_uk_PriceFeed.cs" />
     <Compile Include="Components\MinimumRateOfChangeStockFilter.cs" />

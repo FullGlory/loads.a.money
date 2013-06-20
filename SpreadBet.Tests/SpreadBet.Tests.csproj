@@ -55,6 +55,7 @@
     <Compile Include="CompositeExitDeciderTests.cs" />
     <Compile Include="DecisionByGrowthAndCurrentPosition..cs" />
     <Compile Include="ExistingStockRemovalFilterTests.cs" />
+    <Compile Include="ExitAfterInvestmentPeriodTests.cs" />
     <Compile Include="MinimumRateOfChangeStockFilterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConsistentChangeStockFilterTests.cs" />
