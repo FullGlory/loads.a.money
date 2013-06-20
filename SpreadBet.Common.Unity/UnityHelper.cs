@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace SpreadBet.Common.Helpers
+namespace SpreadBet.Common.Unity
 {
 	using System;
 	using System.Collections.Generic;

@@ -1,15 +1,14 @@
-﻿using System.Linq;
-using Microsoft.Practices.Unity;
-using SpreadBet.Common.Helpers;
-using SpreadBet.Common.Interfaces;
-
-namespace SpreadBet.Console
+﻿namespace SpreadBet.Console
 {
+    using Microsoft.Practices.Unity;
+    using SpreadBet.Common.Interfaces;
+    using SpreadBet.Common.Unity;
+
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			var	container = args.Any() ? UnityHelper.GetContainer(args.First()) : UnityHelper.GetContainer();
+			var	container = UnityHelper.GetContainer();
 			
             var application = container.Resolve<IExecutableApplication>();
 

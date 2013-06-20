@@ -68,6 +68,10 @@
       <Project>{1795064e-d345-4594-9cb3-8a611204861d}</Project>
       <Name>SpreadBet.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Common.Unity\SpreadBet.Common.Unity.csproj">
+      <Project>{a0bc648a-26a0-4f10-8cc3-49b6ee1fe79e}</Project>
+      <Name>SpreadBet.Common.Unity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
       <Project>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</Project>
       <Name>SpreadBet.Common</Name>

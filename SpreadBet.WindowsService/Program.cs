@@ -1,13 +1,13 @@
-﻿using System;
-using System.ServiceProcess;
-using SpreadBet.Common.Helpers;
-using SpreadBet.Scheduler;
-using SpreadBet.Common.Interfaces;
-using System.Configuration;
-using Microsoft.Practices.Unity;
-
-namespace SpreadBet.WindowsService
+﻿namespace SpreadBet.WindowsService
 {
+    using System;
+    using System.Configuration;
+    using System.ServiceProcess;
+    using Microsoft.Practices.Unity;
+    using SpreadBet.Common.Interfaces;
+    using SpreadBet.Common.Unity;
+    using SpreadBet.Scheduler;
+
 	static class Program
 	{
 		/// <summary>

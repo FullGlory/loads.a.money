@@ -66,9 +66,25 @@
       <Project>{1795064E-D345-4594-9CB3-8A611204861D}</Project>
       <Name>SpreadBet.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.CommandBus\SpreadBet.CommandBus.csproj">
+      <Project>{044ad973-f7d8-4d08-bd31-74ad757bb98d}</Project>
+      <Name>SpreadBet.CommandBus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Common.Unity\SpreadBet.Common.Unity.csproj">
+      <Project>{a0bc648a-26a0-4f10-8cc3-49b6ee1fe79e}</Project>
+      <Name>SpreadBet.Common.Unity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
       <Project>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</Project>
       <Name>SpreadBet.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Domain.CommandHandlers\SpreadBet.Domain.CommandHandlers.csproj">
+      <Project>{da1c5616-1484-4912-a9bc-276dda7787ef}</Project>
+      <Name>SpreadBet.Domain.CommandHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Domain.Commands\SpreadBet.Domain.Commands.csproj">
+      <Project>{4b8ff03f-5762-4ff7-a3f9-9ff95eeb181f}</Project>
+      <Name>SpreadBet.Domain.Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Repository\SpreadBet.Repository.csproj">
       <Project>{48EB7A1A-D47F-4A89-BA92-0D1F592FF3A8}</Project>
