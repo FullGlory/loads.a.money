@@ -22,8 +22,7 @@ namespace SpreadBet.Common.Components
 		private const string __USERAGENT = "Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63 Safari/534.3";
 
 		private CookieContainer _cookieContainer = null;
-		private long _proxyIndex = 0;
-
+	
 		public HTTPScraper()
 		{
 			this._cookieContainer = new CookieContainer();

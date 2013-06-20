@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\BullBearingsController.cs" />
+    <Compile Include="Components\CompositeExitDecider.cs" />
     <Compile Include="Components\DataProviders\AccountDataProvider.cs" />
     <Compile Include="Components\CompositeStockFilter.cs" />
     <Compile Include="Components\ConsistentChangeStockFilter.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Helpers\UnityHelper.cs" />
     <Compile Include="Interfaces\IBetController.cs" />
     <Compile Include="Interfaces\IExecutableApplication.cs" />
+    <Compile Include="Interfaces\IExitDecider.cs" />
     <Compile Include="Interfaces\IInvestDecider.cs" />
     <Compile Include="Interfaces\IAccountDataProvider.cs" />
     <Compile Include="Interfaces\IPortfolioDataProvider.cs" />

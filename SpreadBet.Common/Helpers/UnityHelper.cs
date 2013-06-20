@@ -60,8 +60,6 @@ namespace SpreadBet.Common.Helpers
 					throw new ArgumentException("Please specify the application name on the command line, or a valid default application in through configuration");
 				}
 			}
-
-			return null;
 		}
 	}
 }

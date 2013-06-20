@@ -28,22 +28,7 @@ namespace SpreadBet.Common.Components
 		private readonly decimal _maxLoss;
 		private readonly decimal _spreadLossRation;
 
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="DecisionByGrowthAndCurrentPosition"/> class.
-        ///// </summary>
-        ///// <param name="stockHistoryDataProvider">The stock history data provider.</param>
-        ///// <param name="accountDataProvider">The account data provider.</param>
-        ///// <param name="periods">The periods number of periods over which to measure stock growth</param>
-        ///// <param name="maxBidAmount">The max bid amount.</param>
-        ///// <param name="maxLoss">The max loss.</param>
-        //public DecisionByGrowthAndCurrentPosition(
-        //    IStockHistoryDataProvider stockHistoryDataProvider,
-        //    IAccountDataProvider accountDataProvider,
-        //    int periods,
-        //    decimal maxBidAmount,
-        //    decimal maxLoss) : this(stockHistoryDataProvider, accountDataProvider, periods, maxBidAmount, maxLoss, .50m) {}
-
-		/// <summary>
+        /// <summary>
 		/// Initializes a new instance of the <see cref="DecisionByGrowthAndCurrentPosition"/> class.
 		/// </summary>
 		/// <param name="stockHistoryDataProvider">The stock history data provider.</param>
@@ -140,7 +125,7 @@ namespace SpreadBet.Common.Components
 
 			return retVal;
 		}
-
+	
 		private class StockAnalysis
 		{
 			public Stock Stock { get; set; }

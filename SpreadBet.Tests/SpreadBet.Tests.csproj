@@ -48,8 +48,11 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\GetBetDecisionsTests.cs" />
+    <Compile Include="Application\GetBetDecisionsTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CompositeStockFilterTests.cs" />
+    <Compile Include="CompositeExitDeciderTests.cs" />
     <Compile Include="DecisionByGrowthAndCurrentPosition..cs" />
     <Compile Include="ExistingStockRemovalFilterTests.cs" />
     <Compile Include="MinimumRateOfChangeStockFilterTests.cs" />
@@ -74,6 +77,7 @@
       <Name>SpreadBet.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
