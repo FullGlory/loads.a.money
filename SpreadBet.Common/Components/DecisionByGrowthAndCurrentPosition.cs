@@ -117,6 +117,7 @@ namespace SpreadBet.Common.Components
 					OpeningPosition = (x.RateOfChange < 0) ? x.Prices.Last().Offer : x.Prices.Last().Bid, 
 					InitialLoss = Math.Round(initialLoss, 2, MidpointRounding.AwayFromZero), 
 					Stock = x.Stock, 
+					Price = x.Prices.Last(),
 					ExitPrice = Math.Round(Math.Max(0, (x.RateOfChange < 0) ?  x.Prices.Last().Offer + (_maxLoss / bidAmount) : x.Prices.Last().Bid - (_maxLoss / bidAmount)), 2, MidpointRounding.AwayFromZero)
 				};
 

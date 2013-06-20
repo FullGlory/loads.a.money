@@ -17,6 +17,7 @@ namespace SpreadBet.Domain
 	public class Bet : Entity
 	{
 		public Stock Stock { get; set; }
+		public Price Price { get; set; }
 
 		public decimal InitialLoss { get; set; }
 		public decimal BidAmount { get; set; }

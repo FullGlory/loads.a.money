@@ -58,6 +58,7 @@
     <Compile Include="CommandBus\SimpleCommandBusTests.cs" />
     <Compile Include="CompositeStockFilterTests.cs" />
     <Compile Include="CompositeExitDeciderTests.cs" />
+    <Compile Include="ExitOnReEvaluatingInvestDecisionTests.cs" />
     <Compile Include="DecisionByGrowthAndCurrentPosition..cs" />
     <Compile Include="Domain.CommandHandlers\PlaceBetCommandHandlerTests.cs" />
     <Compile Include="ExistingStockRemovalFilterTests.cs" />

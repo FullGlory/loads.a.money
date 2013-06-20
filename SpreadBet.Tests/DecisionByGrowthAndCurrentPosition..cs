@@ -65,10 +65,13 @@ namespace SpreadBet.Tests
 
 			var bet = bets.FirstOrDefault();
 
+			var stockPrice = history.Prices.Where(x => x.Key.Id == 7).Select(x => x.Value).Single();
+
 			Assert.IsNotNull(bet);
 			Assert.AreEqual(37, bet.BidAmount);
 			Assert.AreEqual(31.82m, bet.ExitPrice);
 			Assert.AreEqual(37.23m, bet.OpeningPosition);
+			Assert.AreEqual(stockPrice, bet.Price);
 			Assert.AreEqual(Direction.Increase, bet.Direction);
 		}
 
@@ -123,10 +126,13 @@ namespace SpreadBet.Tests
 
 			var bet = bets.FirstOrDefault();
 
+			var stockPrice = history.Prices.Where(x => x.Key.Id == 7).Select(x => x.Value).Single();
+
 			Assert.IsNotNull(bet);
 			Assert.AreEqual(37, bet.BidAmount);
 			Assert.AreEqual(28.64m, bet.ExitPrice);
 			Assert.AreEqual(23.23m, bet.OpeningPosition);
+			Assert.AreEqual(stockPrice, bet.Price);
 			Assert.AreEqual(Direction.Decrease, bet.Direction);
 		}
 	}
