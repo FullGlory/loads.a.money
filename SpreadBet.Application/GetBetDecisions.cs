@@ -12,72 +12,62 @@ namespace SpreadBet.Application
 	using System.Text;
 	using SpreadBet.Common.Interfaces;
 	using CuttingEdge.Conditions;
+    using SpreadBet.Domain.Commands;
+    using SpreadBet.CommandBus;
+
 
 	/// <summary>
 	/// Returns a list of bet decisions
 	/// </summary>
 	public class GetBetDecisions: IExecutableApplication
 	{
-		private readonly IInvestDecider _investDecider;
-		private readonly IStockFilter _stockFilter;
-		private readonly IStockDataProvider _stockProvider;
-        private readonly IPortfolioDataProvider _portfolioProvider;
-        private readonly IAccountDataProvider _accountProvider;
-        private readonly IBetController _betController;
+        private IStockDataProvider _stockDataProvider;
+        private IStockFilter _stockFilter;
+        private IInvestDecider _investDecider;
+        private ICommandSender _commandBus;
 
+        public GetBetDecisions(
+            IStockDataProvider stockDataProvider, 
+            IStockFilter stockFilter, 
+            IInvestDecider investDecider,
+            ICommandSender commandBus)
+        {
+            Condition.Requires(stockDataProvider).IsNotNull();
+            Condition.Requires(stockFilter).IsNotNull();
+            Condition.Requires(investDecider).IsNotNull();
+            Condition.Requires(commandBus).IsNotNull();
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="GatherPriceData"/> class.
-		/// </summary>
-		/// <param name="stockPriceProvider">The stock price provider.</param>
-		public GetBetDecisions(IStockDataProvider stockProvider, 
-							   IInvestDecider investDecider, 
-							   IStockFilter stockFilter,
-                               IPortfolioDataProvider portfolioProvider,
-                               IAccountDataProvider accountProvider,
-                               IBetController betController)
-		{
-			Condition.Requires(stockProvider).IsNotNull();
-			Condition.Requires(investDecider).IsNotNull();
-			Condition.Requires(stockFilter).IsNotNull();
-            Condition.Requires(portfolioProvider).IsNotNull();
-            Condition.Requires(accountProvider).IsNotNull();
-            Condition.Requires(betController).IsNotNull();
-
-			this._stockFilter = stockFilter;
-			this._investDecider = investDecider;
-			this._stockProvider = stockProvider;
-            this._portfolioProvider = portfolioProvider;
-            this._accountProvider = accountProvider;
-            this._betController = betController;
-		}
-
+            this._stockDataProvider = stockDataProvider;
+            this._stockFilter = stockFilter;
+            this._investDecider = investDecider;
+            this._commandBus = commandBus;
+        }
 		public void Run()
 		{
-			// Get all the stocks we know about
-			var stocks = this._stockProvider.GetStocks();
+            // Get all the stocks we know about
+            var stocks = this._stockDataProvider.GetStocks();
 
-			// Determine which ones look interesting
-			var candidates = this._stockFilter.GetInvestmentCandidates(stocks);
+            // Determine which ones look interesting
+            var candidates = this._stockFilter.GetInvestmentCandidates(stocks);
 
-			// Determine what the bets might look like
-			var bets = this._investDecider.GetInvestmentDescisions(candidates);
+            // Determine what the bets might look like
+            var bets = this._investDecider.GetInvestmentDescisions(candidates);
 
-            if (bets.Any())
+            foreach (var bet in bets)
             {
-                var account = this._accountProvider.GetCurrentPosition();
-
-                foreach (var bet in bets)
+                // Create a command to represent an update to the domain
+                var command = new PlaceBetCommand
                 {
-                    var result = this._betController.Open(account, bet);
+                    BidAmount = bet.BidAmount,
+                    ExitPrice = bet.ExitPrice,
+                    InitialLoss = bet.InitialLoss,
+                    IsIncrease = (bet.Direction == Domain.Direction.Increase),
+                    OpeningPosition = bet.OpeningPosition,
+                    StockIdentifier = bet.Stock.Identifier
+                };
 
-                    if (result)
-                    {
-                        this._portfolioProvider.SaveBet(bet);
-                    }
-
-                    //Console.WriteLine("Stock:{0} BidAmount:{1} ExitPrice{2} Direction:{3}", bet.Stock.Name, bet.BidAmount, bet.ExitPrice, bet.Direction.ToString());
-                }
+                // Send the command for processing
+                this._commandBus.Send(command);
             }
 		}
 	}

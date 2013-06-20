@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1795064E-D345-4594-9CB3-8A611204861D}</ProjectGuid>
+    <ProjectGuid>{4B8FF03F-5762-4FF7-A3F9-9FF95EEB181F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpreadBet.Application</RootNamespace>
-    <AssemblyName>SpreadBet.Application</AssemblyName>
+    <RootNamespace>SpreadBet.Domain.Commands</RootNamespace>
+    <AssemblyName>SpreadBet.Domain.Commands</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,16 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CuttingEdge.Conditions">
-      <HintPath>..\packages\CuttingEdge.Conditions.1.2.0.0\lib\NET35\CuttingEdge.Conditions.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,9 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GatherPriceData.cs" />
-    <Compile Include="GetBetDecisions.cs" />
-    <Compile Include="MigrateDatabase.cs" />
+    <Compile Include="PlaceBetCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,25 +48,6 @@
       <Project>{044ad973-f7d8-4d08-bd31-74ad757bb98d}</Project>
       <Name>SpreadBet.CommandBus</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
-      <Project>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</Project>
-      <Name>SpreadBet.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpreadBet.Domain.Commands\SpreadBet.Domain.Commands.csproj">
-      <Project>{4b8ff03f-5762-4ff7-a3f9-9ff95eeb181f}</Project>
-      <Name>SpreadBet.Domain.Commands</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
-      <Project>{70BF6160-D9BA-40DC-8982-3BE574C30F17}</Project>
-      <Name>SpreadBet.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpreadBet.Repository\SpreadBet.Repository.csproj">
-      <Project>{48EB7A1A-D47F-4A89-BA92-0D1F592FF3A8}</Project>
-      <Name>SpreadBet.Repository</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

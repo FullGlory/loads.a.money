@@ -19,8 +19,8 @@ namespace SpreadBet.Tests
 		{
 			var bets = new Bet[]
 			{
-				new Bet { Id = 1, PlacedOn = DateTime.UtcNow.AddHours(-2), BidAmount = 13.12m, Direction = Domain.Direction.Increase, ExitPrice = 10.2m, InitialLoss = 100.01m, OpeningPosition = 12.5m, Stock = new Stock { Identifier = "STK.1" } }, 
-				new Bet { Id = 1, PlacedOn = DateTime.UtcNow.AddHours(-1), BidAmount = 13.13m, Direction = Domain.Direction.Increase, ExitPrice = 10.2m, InitialLoss = 100.01m, OpeningPosition = 12.5m, Stock = new Stock { Identifier = "STK.2" } }, 
+				new Bet { Id = 1, PlacedOn = DateTime.UtcNow.AddHours(-2), BidAmount = 13.12m, Direction = Direction.Increase, ExitPrice = 10.2m, InitialLoss = 100.01m, OpeningPosition = 12.5m, Stock = new Stock { Identifier = "STK.1" } }, 
+				new Bet { Id = 1, PlacedOn = DateTime.UtcNow.AddHours(-1), BidAmount = 13.13m, Direction = Direction.Increase, ExitPrice = 10.2m, InitialLoss = 100.01m, OpeningPosition = 12.5m, Stock = new Stock { Identifier = "STK.2" } }, 
 			};
 
 			var decider1 = new Mock<IExitDecider>();
@@ -51,8 +51,8 @@ namespace SpreadBet.Tests
 		{
 			var bets = new Bet[]
 			{
-				new Bet { Id = 1, BidAmount = 13.12m, Direction = Domain.Direction.Increase, ExitPrice = 10.2m, InitialLoss = 100.01m, OpeningPosition = 12.5m, Stock = new Stock { Identifier = "STK.1" } }, 
-				new Bet { Id = 1, BidAmount = 13.13m, Direction = Domain.Direction.Increase, ExitPrice = 10.2m, InitialLoss = 100.01m, OpeningPosition = 12.5m, Stock = new Stock { Identifier = "STK.2" } }, 
+				new Bet { Id = 1, BidAmount = 13.12m, Direction = Direction.Increase, ExitPrice = 10.2m, InitialLoss = 100.01m, OpeningPosition = 12.5m, Stock = new Stock { Identifier = "STK.1" } }, 
+				new Bet { Id = 1, BidAmount = 13.13m, Direction = Direction.Increase, ExitPrice = 10.2m, InitialLoss = 100.01m, OpeningPosition = 12.5m, Stock = new Stock { Identifier = "STK.2" } }, 
 			};
 
 			var decider1 = new Mock<IExitDecider>();

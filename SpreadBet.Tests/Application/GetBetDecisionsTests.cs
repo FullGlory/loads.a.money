@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Ploeh.AutoFixture;
 using SpreadBet.Application;
+using SpreadBet.CommandBus;
 using SpreadBet.Common.Interfaces;
 using SpreadBet.Domain;
+using SpreadBet.Domain.Commands;
 
 namespace SpreadBet.Tests.Application
 {
@@ -17,9 +17,8 @@ namespace SpreadBet.Tests.Application
         private Mock<IStockDataProvider> _mockStockDataProvider;
         private Mock<IInvestDecider> _mockInvestDecider;
         private Mock<IStockFilter> _mockStockFilter;
-        private Mock<IPortfolioDataProvider> _mockPortfolioDataProvider;
-        private Mock<IAccountDataProvider> _mockAccountDataProvider;
-        private Mock<IBetController> _mockBetController;
+        private Mock<ICommandSender> _mockCommandBus;
+        private Fixture _fixture;
 
         [TestInitialize]
         public void SetUp()
@@ -27,32 +26,29 @@ namespace SpreadBet.Tests.Application
             _mockStockDataProvider = new Mock<IStockDataProvider>();
             _mockInvestDecider = new Mock<IInvestDecider>();
             _mockStockFilter = new Mock<IStockFilter>();
-            _mockPortfolioDataProvider = new Mock<IPortfolioDataProvider>();
-            _mockAccountDataProvider = new Mock<IAccountDataProvider>();
-            _mockBetController = new Mock<IBetController>();
+            _mockCommandBus = new Mock<ICommandSender>();
             _app = new GetBetDecisions(
-                _mockStockDataProvider.Object, 
-                _mockInvestDecider.Object, 
+                _mockStockDataProvider.Object,
                 _mockStockFilter.Object, 
-                _mockPortfolioDataProvider.Object,
-                _mockAccountDataProvider.Object,
-                _mockBetController.Object);
+                _mockInvestDecider.Object, 
+                _mockCommandBus.Object);
+
+            _fixture = new Fixture();
         }
 
         [TestMethod]
         public void Run_BetOpportunityForSingleStock_BetPlaced()
         {
             // Arrange
-            var stock = new Stock();
+            var stock = _fixture.Create<Stock>();
             var stocks = new List<Stock> { stock };
-            var bet = new Bet();
-            var account = new Account();
+            var bet = _fixture.Build<Bet>()
+                              .With(x=>x.Stock, stock)
+                              .Create();
 
             _mockStockDataProvider.Setup(x => x.GetStocks()).Returns(stocks);
             _mockStockFilter.Setup(x => x.GetInvestmentCandidates(stocks)).Returns(stocks);
-            _mockInvestDecider.Setup(x => x.GetInvestmentDescisions(stocks)).Returns(new List<Bet> { bet });
-            _mockAccountDataProvider.Setup(x => x.GetCurrentPosition()).Returns(account);
-            _mockBetController.Setup(x => x.Open(account, bet)).Returns(true);
+            _mockInvestDecider.Setup(x => x.GetInvestmentDescisions(stocks)).Returns(new List<Bet> { bet });   
 
             // Act
             _app.Run();
@@ -61,9 +57,19 @@ namespace SpreadBet.Tests.Application
             _mockStockDataProvider.VerifyAll();
             _mockStockFilter.VerifyAll();
             _mockInvestDecider.VerifyAll();
-            _mockAccountDataProvider.VerifyAll();
-            _mockBetController.VerifyAll();
-            _mockPortfolioDataProvider.Verify(x => x.SaveBet(bet), Times.Once());
+
+            _mockCommandBus.Verify(
+                    x => x.Send(
+                        It.Is<PlaceBetCommand>(
+                            cmd => cmd.StockIdentifier == bet.Stock.Identifier &&
+                                cmd.InitialLoss == bet.InitialLoss &&
+                                cmd.BidAmount == bet.BidAmount &&
+                                cmd.OpeningPosition == bet.OpeningPosition &&
+                                cmd.ExitPrice == bet.ExitPrice &&
+                                cmd.IsIncrease == (bet.Direction == Direction.Increase)
+                                                )
+                        ), 
+                    Times.Once());
         }
 
 

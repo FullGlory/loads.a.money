@@ -37,6 +37,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\packages\AutoFixture.3.2.1\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -51,9 +55,11 @@
     <Compile Include="Application\GetBetDecisionsTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CommandBus\SimpleCommandBusTests.cs" />
     <Compile Include="CompositeStockFilterTests.cs" />
     <Compile Include="CompositeExitDeciderTests.cs" />
     <Compile Include="DecisionByGrowthAndCurrentPosition..cs" />
+    <Compile Include="Domain.CommandHandlers\PlaceBetCommandHandlerTests.cs" />
     <Compile Include="ExistingStockRemovalFilterTests.cs" />
     <Compile Include="ExitAfterInvestmentPeriodTests.cs" />
     <Compile Include="MinimumRateOfChangeStockFilterTests.cs" />
@@ -69,13 +75,29 @@
       <Project>{1795064e-d345-4594-9cb3-8a611204861d}</Project>
       <Name>SpreadBet.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.CommandBus\SpreadBet.CommandBus.csproj">
+      <Project>{044ad973-f7d8-4d08-bd31-74ad757bb98d}</Project>
+      <Name>SpreadBet.CommandBus</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
       <Project>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</Project>
       <Name>SpreadBet.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Domain.CommandHandlers\SpreadBet.Domain.CommandHandlers.csproj">
+      <Project>{da1c5616-1484-4912-a9bc-276dda7787ef}</Project>
+      <Name>SpreadBet.Domain.CommandHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Domain.Commands\SpreadBet.Domain.Commands.csproj">
+      <Project>{4b8ff03f-5762-4ff7-a3f9-9ff95eeb181f}</Project>
+      <Name>SpreadBet.Domain.Commands</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
       <Project>{70BF6160-D9BA-40DC-8982-3BE574C30F17}</Project>
       <Name>SpreadBet.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Repository\SpreadBet.Repository.csproj">
+      <Project>{48eb7a1a-d47f-4a89-ba92-0d1f592ff3a8}</Project>
+      <Name>SpreadBet.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
