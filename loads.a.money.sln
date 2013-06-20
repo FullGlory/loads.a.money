@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Common", "SpreadBet.Common\SpreadBet.Common.csproj", "{70D49911-0FB7-4292-9954-8D9AAA5B848F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Tests", "SpreadBet.Tests\SpreadBet.Tests.csproj", "{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}"
@@ -33,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Domain.CommandHandlers", "SpreadBet.Domain.CommandHandlers\SpreadBet.Domain.CommandHandlers.csproj", "{DA1C5616-1484-4912-A9BC-276DDA7787EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Common.Unity", "SpreadBet.Common.Unity\SpreadBet.Common.Unity.csproj", "{A0BC648A-26A0-4F10-8CC3-49B6EE1FE79E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Acceptance.Tests", "SpreadBet.Acceptance\SpreadBet.Acceptance.Tests.csproj", "{42883CDB-3D06-43E9-A745-4A68EE0C04A8}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -177,6 +179,16 @@ Global
 		{A0BC648A-26A0-4F10-8CC3-49B6EE1FE79E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A0BC648A-26A0-4F10-8CC3-49B6EE1FE79E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A0BC648A-26A0-4F10-8CC3-49B6EE1FE79E}.Release|x86.ActiveCfg = Release|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{42883CDB-3D06-43E9-A745-4A68EE0C04A8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

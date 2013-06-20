@@ -10,6 +10,9 @@ namespace SpreadBet.Repository
         {
             try
             {
+                if (ctx.Database.Exists())
+                    ctx.Database.Delete();
+
                 ctx.Database.Initialize(true);
             }
             catch (Exception ex)

@@ -39,5 +39,10 @@ namespace SpreadBet.Common.Components
                 _repository.SaveOrUpdate<StockPrice>(sp);
             }
         }
+
+        public void UpdateStockPrice(StockPrice stockPrice)
+        {
+            _repository.SaveOrUpdate<StockPrice>(stockPrice);
+        }
 	}
 }

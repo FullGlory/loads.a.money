@@ -188,7 +188,6 @@ namespace SpreadBet.Common.Components
                 Stock = stock,
 				Price = new Price
 				{
-					Mid = decimal.Parse(mid), 
 					Bid = decimal.Parse(bid), 
 					Offer = decimal.Parse(offer), 
 					UpdatedAt = DateTime.Now

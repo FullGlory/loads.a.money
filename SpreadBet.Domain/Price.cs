@@ -13,7 +13,10 @@ namespace SpreadBet.Domain
 
     public class Price : Entity
 	{
-		public decimal Mid { get; set; }
+		public decimal Mid 
+        { 
+            get { return (this.Bid + this.Offer) / 2;}
+        }
 		public decimal Bid { get; set; }
 		public decimal Offer { get; set; }
 

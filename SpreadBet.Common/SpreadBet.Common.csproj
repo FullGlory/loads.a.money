@@ -59,7 +59,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\BullBearingsController.cs" />
+    <Compile Include="Components\Automation\BullBearingsController.cs" />
+    <Compile Include="Components\Automation\BullBearingsProvider.cs" />
+    <Compile Include="Components\Automation\BullBearingsSettings.cs" />
+    <Compile Include="Components\Automation\PhantomDriver.cs" />
+    <Compile Include="Components\Automation\WebDriverExtensions.cs" />
     <Compile Include="Components\CompositeExitDecider.cs" />
     <Compile Include="Components\DataProviders\AccountDataProvider.cs" />
     <Compile Include="Components\CompositeStockFilter.cs" />
@@ -74,10 +78,16 @@
     <Compile Include="Components\MinimumRateOfChangeStockFilter.cs" />
     <Compile Include="Components\DataProviders\StockDataProvider.cs" />
     <Compile Include="Components\DataProviders\StockHistoryDataProvider.cs" />
+    <Compile Include="Components\PriceUpdate.cs" />
     <Compile Include="Components\WebDriverExtensions.cs" />
     <Compile Include="Entities\ScrapeInfo.cs" />
     <Compile Include="Entities\StockPriceHistory.cs" />
+    <Compile Include="Exceptions\AutomationException.cs" />
+    <Compile Include="Exceptions\ExceptionMessages.cs" />
     <Compile Include="Helpers\TimePeriodHelper.cs" />
+    <Compile Include="Interfaces\IAutomationDriver.cs" />
+    <Compile Include="Interfaces\IAutomationProvider.cs" />
+    <Compile Include="Interfaces\IAutomationSettings.cs" />
     <Compile Include="Interfaces\IBetController.cs" />
     <Compile Include="Interfaces\IExecutableApplication.cs" />
     <Compile Include="Interfaces\IExitDecider.cs" />
@@ -89,6 +99,7 @@
     <Compile Include="Interfaces\IStockFilter.cs" />
     <Compile Include="Interfaces\IStockHistoryDataProvider.cs" />
     <Compile Include="Interfaces\IStockPriceProvider.cs" />
+    <Compile Include="Interfaces\IUpdate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -37,12 +37,11 @@
                 ExitPrice = command.ExitPrice,
                 InitialLoss = command.InitialLoss,
                 OpeningPosition = command.OpeningPosition,
-                Stock = stock
+                Stock = stock,
+                Account = this._accountDataProvider.GetCurrentPosition()
             };
 
-            var account = this._accountDataProvider.GetCurrentPosition();
-
-            var result = this._betController.Open(account, bet);
+            var result = this._betController.Open(bet);
 
             if (result)
             {

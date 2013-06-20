@@ -49,7 +49,7 @@
             // Assert
             _mockAccountDataProvider.VerifyAll();
             _mockRepository.VerifyAll();
-            _mockBetController.Verify(x => x.Open(account, It.Is<Bet>(b => b.Stock.Identifier == cmd.StockIdentifier && b.BidAmount == cmd.BidAmount && b.ExitPrice == cmd.ExitPrice && b.InitialLoss == cmd.InitialLoss && b.OpeningPosition == cmd.OpeningPosition)), Times.Once());
+            _mockBetController.Verify(x => x.Open(It.Is<Bet>(b => b.Stock.Identifier == cmd.StockIdentifier && b.BidAmount == cmd.BidAmount && b.ExitPrice == cmd.ExitPrice && b.InitialLoss == cmd.InitialLoss && b.OpeningPosition == cmd.OpeningPosition)), Times.Once());
         }
     }
 }

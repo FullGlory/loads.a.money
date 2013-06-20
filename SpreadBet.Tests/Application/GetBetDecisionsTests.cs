@@ -18,6 +18,7 @@ namespace SpreadBet.Tests.Application
         private Mock<IInvestDecider> _mockInvestDecider;
         private Mock<IStockFilter> _mockStockFilter;
         private Mock<ICommandSender> _mockCommandBus;
+        private Mock<IUpdate> _mockPriceUpdate;
         private Fixture _fixture;
 
         [TestInitialize]
@@ -27,11 +28,13 @@ namespace SpreadBet.Tests.Application
             _mockInvestDecider = new Mock<IInvestDecider>();
             _mockStockFilter = new Mock<IStockFilter>();
             _mockCommandBus = new Mock<ICommandSender>();
+            _mockPriceUpdate = new Mock<IUpdate>();
             _app = new GetBetDecisions(
                 _mockStockDataProvider.Object,
                 _mockStockFilter.Object, 
                 _mockInvestDecider.Object, 
-                _mockCommandBus.Object);
+                _mockCommandBus.Object,
+                _mockPriceUpdate.Object);
 
             _fixture = new Fixture();
         }

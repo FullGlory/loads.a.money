@@ -33,13 +33,13 @@ namespace SpreadBet.Tests
 			var currentDate = DateTime.UtcNow.AddMinutes(10);
 			var lastPeriodEnd = DateTime.Parse(currentDate.ToString("dd MMMM yyyy HH:00:00"));
 
-			history.Prices.Add(new Period { Id = 1, To = lastPeriodEnd.AddHours(-6) }, new Price { Mid = 25.23m });
-			history.Prices.Add(new Period { Id = 2, To = lastPeriodEnd.AddHours(-5) }, new Price { Mid = 26.23m });
-			history.Prices.Add(new Period { Id = 3, To = lastPeriodEnd.AddHours(-4) }, new Price { Mid = 28.23m });
-			history.Prices.Add(new Period { Id = 4, To = lastPeriodEnd.AddHours(-3) }, new Price { Mid = 30.23m });
-			history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-2) }, new Price { Mid = 30.25m });
-			history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-1) }, new Price { Mid = 31.50m });
-			history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(0) }, new Price { Mid = 35.40m });
+            history.Prices.Add(new Period { Id = 1, To = lastPeriodEnd.AddHours(-6) }, new Price { Bid = 25.20m, Offer = 25.26m });
+            history.Prices.Add(new Period { Id = 2, To = lastPeriodEnd.AddHours(-5) }, new Price { Bid = 25.20m, Offer = 25.26m });
+            history.Prices.Add(new Period { Id = 3, To = lastPeriodEnd.AddHours(-4) }, new Price { Bid = 25.20m, Offer = 25.26m });
+            history.Prices.Add(new Period { Id = 4, To = lastPeriodEnd.AddHours(-3) }, new Price { Bid = 25.20m, Offer = 25.26m });
+            history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-2) }, new Price { Bid = 25.20m, Offer = 25.26m });
+            history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-1) }, new Price { Bid = 25.20m, Offer = 25.26m });
+            history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(0) }, new Price { Bid = 25.20m, Offer = 25.26m });
 
 			var stockPriceProvider = new Mock<IStockHistoryDataProvider>();
 			stockPriceProvider.Setup(x => x.GetStockHistory(stock, 5)).Returns(history);
@@ -71,13 +71,13 @@ namespace SpreadBet.Tests
 			var currentDate = DateTime.UtcNow.AddMinutes(10);
 			var lastPeriodEnd = DateTime.Parse(currentDate.ToString("dd MMMM yyyy HH:00:00"));
 
-			history.Prices.Add(new Period { Id = 1, To = lastPeriodEnd.AddHours(-8) }, new Price { Mid = 45.23m });
-			history.Prices.Add(new Period { Id = 2, To = lastPeriodEnd.AddHours(-7) }, new Price { Mid = 43.23m });
-			history.Prices.Add(new Period { Id = 3, To = lastPeriodEnd.AddHours(-6) }, new Price { Mid = 30.23m });
-			history.Prices.Add(new Period { Id = 4, To = lastPeriodEnd.AddHours(-5) }, new Price { Mid = 29.23m });
-			history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-4) }, new Price { Mid = 27.25m });
-			history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-3) }, new Price { Mid = 18.50m });
-			history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(-2) }, new Price { Mid = 13.40m });
+            history.Prices.Add(new Period { Id = 1, To = lastPeriodEnd.AddHours(-8) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 2, To = lastPeriodEnd.AddHours(-7) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 3, To = lastPeriodEnd.AddHours(-6) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 4, To = lastPeriodEnd.AddHours(-5) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-4) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-3) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(-2) }, new Price { Bid = 45.20m, Offer = 45.26m });
 
 			var stockPriceProvider = new Mock<IStockHistoryDataProvider>();
 			stockPriceProvider.Setup(x => x.GetStockHistory(stock, 5)).Returns(history);
@@ -109,13 +109,13 @@ namespace SpreadBet.Tests
 			var currentDate = DateTime.UtcNow.AddMinutes(10);
 			var lastPeriodEnd = DateTime.Parse(currentDate.ToString("dd MMMM yyyy HH:00:00"));
 
-			history.Prices.Add(new Period { Id = 1, To = lastPeriodEnd.AddHours(-6) }, new Price { Mid = 45.23m });
-			history.Prices.Add(new Period { Id = 2, To = lastPeriodEnd.AddHours(-5) }, new Price { Mid = 43.23m });
-			history.Prices.Add(new Period { Id = 3, To = lastPeriodEnd.AddHours(-4) }, new Price { Mid = 30.23m });
-			history.Prices.Add(new Period { Id = 4, To = lastPeriodEnd.AddHours(-3) }, new Price { Mid = 29.23m });
-			history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-2) }, new Price { Mid = 27.25m });
-			history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-1) }, new Price { Mid = 18.50m });
-			history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(0) }, new Price { Mid = 13.40m });
+            history.Prices.Add(new Period { Id = 1, To = lastPeriodEnd.AddHours(-6) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 2, To = lastPeriodEnd.AddHours(-5) }, new Price { Bid = 43.20m, Offer = 43.26m });
+            history.Prices.Add(new Period { Id = 3, To = lastPeriodEnd.AddHours(-4) }, new Price { Bid = 30.20m, Offer = 30.26m });
+            history.Prices.Add(new Period { Id = 4, To = lastPeriodEnd.AddHours(-3) }, new Price { Bid = 29.20m, Offer = 29.26m });
+            history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-2) }, new Price { Bid = 27.20m, Offer = 27.30m });
+            history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-1) }, new Price { Bid = 18.00m, Offer = 19.00m });
+            history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(0) }, new Price { Bid = 13.00m, Offer = 13.80m });
 
 			var stockPriceProvider = new Mock<IStockHistoryDataProvider>();
 			stockPriceProvider.Setup(x => x.GetStockHistory(stock, 5)).Returns(history);
@@ -147,9 +147,9 @@ namespace SpreadBet.Tests
 			var currentDate = DateTime.UtcNow.AddMinutes(10);
 			var lastPeriodEnd = DateTime.Parse(currentDate.ToString("dd MMMM yyyy HH:00:00"));
 
-			history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-2) }, new Price { Mid = 27.25m });
-			history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-1) }, new Price { Mid = 18.50m });
-			history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(0) }, new Price { Mid = 13.40m });
+            history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-2) }, new Price { Bid = 27.00m, Offer = 28.00m });
+			history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-1) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(0) }, new Price { Bid = 13.00m, Offer = 13.80m });
 
 			var stockPriceProvider = new Mock<IStockHistoryDataProvider>();
 			stockPriceProvider.Setup(x => x.GetStockHistory(stock, 5)).Returns(history);
@@ -181,13 +181,13 @@ namespace SpreadBet.Tests
 			var currentDate = DateTime.UtcNow.AddMinutes(10);
 			var lastPeriodEnd = DateTime.Parse(currentDate.ToString("dd MMMM yyyy HH:00:00"));
 
-			history.Prices.Add(new Period { Id = 1, To = lastPeriodEnd.AddHours(-6) }, new Price { Mid = 45.23m });
-			history.Prices.Add(new Period { Id = 2, To = lastPeriodEnd.AddHours(-5) }, new Price { Mid = 43.23m });
-			history.Prices.Add(new Period { Id = 3, To = lastPeriodEnd.AddHours(-4) }, new Price { Mid = 30.23m });
-			history.Prices.Add(new Period { Id = 4, To = lastPeriodEnd.AddHours(-3) }, new Price { Mid = 29.23m });
-			history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-2) }, new Price { Mid = 30.25m });
-			history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-1) }, new Price { Mid = 31.50m });
-			history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(0) }, new Price { Mid = 32.40m });
+            history.Prices.Add(new Period { Id = 1, To = lastPeriodEnd.AddHours(-6) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 2, To = lastPeriodEnd.AddHours(-5) }, new Price { Bid = 45.20m, Offer = 45.26m });
+            history.Prices.Add(new Period { Id = 3, To = lastPeriodEnd.AddHours(-4) }, new Price { Bid = 30.20m, Offer = 30.26m });
+            history.Prices.Add(new Period { Id = 4, To = lastPeriodEnd.AddHours(-3) }, new Price { Bid = 29.20m, Offer = 29.26m });
+            history.Prices.Add(new Period { Id = 5, To = lastPeriodEnd.AddHours(-2) }, new Price { Bid = 30.00m, Offer = 31.00m });
+            history.Prices.Add(new Period { Id = 6, To = lastPeriodEnd.AddHours(-1) }, new Price { Bid = 31.00m, Offer = 32.00m });
+            history.Prices.Add(new Period { Id = 7, To = lastPeriodEnd.AddHours(0) }, new Price { Bid = 32.00m, Offer = 32.80m });
 
 			var stockPriceProvider = new Mock<IStockHistoryDataProvider>();
 			stockPriceProvider.Setup(x => x.GetStockHistory(stock, 5)).Returns(history);
