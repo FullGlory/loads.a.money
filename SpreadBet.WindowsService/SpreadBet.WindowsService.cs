@@ -6,29 +6,30 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using SpreadBet.Processor;
 using SpreadBet.Scheduler;
 
 namespace SpreadBet.WindowsService
 {
 	public partial class SpreadBetWindowsService : ServiceBase
 	{
-	    private IScheduler _scheduler;
+        private TradingProcessor _processor;
 
 		public SpreadBetWindowsService() {}
 
-		public SpreadBetWindowsService(IScheduler scheduler)
+		public SpreadBetWindowsService(TradingProcessor processor)
         {
-            this._scheduler = scheduler;
+            this._processor = processor;
         }
 
         protected override void OnStart(string[] args)
         {
-            this._scheduler.Start();
+            this._processor.Start();
         }
 
         protected override void OnStop()
         {
-            this._scheduler.Stop();
+            this._processor.Stop();
         }
 	}
 }

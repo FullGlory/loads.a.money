@@ -54,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpreadBet.CommandBus\SpreadBet.CommandBus.csproj">
-      <Project>{044ad973-f7d8-4d08-bd31-74ad757bb98d}</Project>
-      <Name>SpreadBet.CommandBus</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
       <Project>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</Project>
       <Name>SpreadBet.Common</Name>
@@ -69,6 +65,10 @@
     <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
       <Project>{70BF6160-D9BA-40DC-8982-3BE574C30F17}</Project>
       <Name>SpreadBet.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Infrastructure\SpreadBet.Infrastructure.csproj">
+      <Project>{5104a584-d0e5-47b0-a2ec-8e575de5f28b}</Project>
+      <Name>SpreadBet.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Repository\SpreadBet.Repository.csproj">
       <Project>{48EB7A1A-D47F-4A89-BA92-0D1F592FF3A8}</Project>

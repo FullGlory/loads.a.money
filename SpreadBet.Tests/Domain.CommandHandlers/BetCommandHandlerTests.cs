@@ -5,15 +5,15 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Ploeh.AutoFixture;
-    using SpreadBet.CommandBus;
     using SpreadBet.Common.Interfaces;
     using SpreadBet.Domain;
-    using SpreadBet.Domain.CommandHandlers;
     using SpreadBet.Domain.Commands;
+    using SpreadBet.Domain.Handlers;
+    using SpreadBet.Infrastructure.Messaging.Handlers;
     using SpreadBet.Repository;
 
     [TestClass]
-    public class PlaceBetCommandHandlerTests
+    public class BetCommandHandlerTests
     {
         private ICommandHandler<PlaceBetCommand> _handler;
         private Mock<IBetController> _mockBetController;
@@ -29,7 +29,7 @@
             _mockBetController = new Mock<IBetController>();
             _mockAccountDataProvider = new Mock<IAccountDataProvider>();
             _mockRepository = new Mock<IRepository>();
-            _handler = new PlaceBetCommandHandler(_mockAccountDataProvider.Object, _mockRepository.Object, _mockBetController.Object);
+            _handler = new BetCommandHandler(_mockAccountDataProvider.Object, _mockRepository.Object, _mockBetController.Object);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@
             _mockRepository.Setup(x => x.Get<Stock>(It.IsAny<Expression<Func<Stock, bool>>>())).Returns(stock);
 
             // Act
-            _handler.Execute(cmd);
+            _handler.Handle(cmd);
 
             // Assert
             _mockAccountDataProvider.VerifyAll();

@@ -3,7 +3,7 @@
     using TechTalk.SpecFlow;
     using SpreadBet.Common.Helpers;
     using SpreadBet.Application;
-    using SpreadBet.Common.Unity;
+    using SpreadBet.Infrastructure.Unity;
 
     [Binding]
     public static class Events
@@ -18,7 +18,7 @@
         public static void BeforeFeature()
         {
             var dbase = new MigrateDatabase();
-            dbase.Run();
+            dbase.Start();
         }
 
         [AfterFeature]

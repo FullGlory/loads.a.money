@@ -11,8 +11,8 @@ namespace SpreadBet.Common.Interfaces
 	using System.Linq;
 	using System.Text;
 
-	public interface IExecutableApplication
-	{
-		void Run();
-	}
+    //public interface IExecutableApplication
+    //{
+    //    void Run();
+    //}
 }

@@ -1,18 +1,19 @@
 ﻿namespace SpreadBet.Console
 {
-    using Microsoft.Practices.Unity;
-    using SpreadBet.Common.Interfaces;
-    using SpreadBet.Common.Unity;
+    using SpreadBet.Processor;
 
-	class Program
+    class Program
 	{
 		static void Main(string[] args)
 		{
-			var	container = UnityHelper.GetContainer();
-			
-            var application = container.Resolve<IExecutableApplication>();
+            var processor = new TradingProcessor();
 
-			application.Run();
+            processor.Start();
+
+            System.Console.WriteLine("Press any key to stop");
+            System.Console.ReadLine();
+
+            processor.Stop();
 		}
 	}
 }

@@ -63,12 +63,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SpreadBet.Common.Unity\SpreadBet.Common.Unity.csproj">
-      <Project>{a0bc648a-26a0-4f10-8cc3-49b6ee1fe79e}</Project>
-      <Name>SpreadBet.Common.Unity</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,6 +1,6 @@
 ﻿namespace SpreadBet.Domain.Commands
 {
-    using SpreadBet.CommandBus;
+    using SpreadBet.Infrastructure.Messaging;
 
     public class PlaceBetCommand : ICommand
     {

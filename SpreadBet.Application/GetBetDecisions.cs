@@ -13,25 +13,25 @@ namespace SpreadBet.Application
     using SpreadBet.Common.Interfaces;
     using CuttingEdge.Conditions;
     using SpreadBet.Domain.Commands;
-    using SpreadBet.CommandBus;
-
+    using SpreadBet.Infrastructure.Messaging;
+    using SpreadBet.Infrastructure;
 
     /// <summary>
     /// Returns a list of bet decisions
     /// </summary>
-    public class GetBetDecisions : IExecutableApplication
+    public class GetBetDecisions : IProcessor
     {
         private IStockDataProvider _stockDataProvider;
         private IStockFilter _stockFilter;
         private IInvestDecider _investDecider;
-        private ICommandSender _commandBus;
+        private ICommandBus _commandBus;
         private IUpdate _priceUpdate;
 
         public GetBetDecisions(
             IStockDataProvider stockDataProvider,
             IStockFilter stockFilter,
             IInvestDecider investDecider,
-            ICommandSender commandBus,
+            ICommandBus commandBus,
             IUpdate priceUpdate)
         {
             Condition.Requires(stockDataProvider).IsNotNull();
@@ -47,7 +47,8 @@ namespace SpreadBet.Application
             this._priceUpdate = priceUpdate;
 
         }
-        public void Run()
+
+        public void Start()
         {
             // Get all the stocks we know about
             var stocks = this._stockDataProvider.GetStocks();
@@ -80,6 +81,11 @@ namespace SpreadBet.Application
                 // Send the command for processing
                 this._commandBus.Send(command);
             }
+        }
+
+        public void Stop()
+        {
+            // Do nothing
         }
     }
 }

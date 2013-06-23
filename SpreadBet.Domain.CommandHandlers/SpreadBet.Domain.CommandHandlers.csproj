@@ -47,10 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpreadBet.CommandBus\SpreadBet.CommandBus.csproj">
-      <Project>{044ad973-f7d8-4d08-bd31-74ad757bb98d}</Project>
-      <Name>SpreadBet.CommandBus</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
       <Project>{70d49911-0fb7-4292-9954-8d9aaa5b848f}</Project>
       <Name>SpreadBet.Common</Name>

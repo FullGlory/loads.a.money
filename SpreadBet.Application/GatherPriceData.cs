@@ -5,13 +5,14 @@ using System.Text;
 using SpreadBet.Common.Interfaces;
 using CuttingEdge.Conditions;
 using SpreadBet.Repository;
+using SpreadBet.Infrastructure;
 
 namespace SpreadBet.Application
 {
 	/// <summary>
 	///		Gathers the stock price information 
 	/// </summary>
-	public class GatherPriceData: IExecutableApplication
+	public class GatherPriceData: IProcessor
 	{
 		private readonly IStockPriceProvider _priceProvider;
 		private readonly IStockDataProvider _stockDataProvider;
@@ -30,11 +31,15 @@ namespace SpreadBet.Application
 			this._stockDataProvider = stockDataProvider;
 		}
 
-		public void Run()
+		public void Start()
 		{
 			var stockPrices = this._priceProvider.GetStockPrices();
 			this._stockDataProvider.SaveStockData(stockPrices);
 		}
-
-	}
+        
+        public void Stop()
+        {
+            // TODO - Do nothing
+        }
+    }
 }

@@ -1,23 +1,24 @@
-﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Ploeh.AutoFixture;
-using SpreadBet.Application;
-using SpreadBet.CommandBus;
-using SpreadBet.Common.Interfaces;
-using SpreadBet.Domain;
-using SpreadBet.Domain.Commands;
-
-namespace SpreadBet.Tests.Application
+﻿namespace SpreadBet.Tests.Application
 {
+    using System.Collections.Generic;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+    using Ploeh.AutoFixture;
+    using SpreadBet.Application;
+    using SpreadBet.Common.Interfaces;
+    using SpreadBet.Domain;
+    using SpreadBet.Domain.Commands;
+    using SpreadBet.Infrastructure;
+    using SpreadBet.Infrastructure.Messaging;
+
     [TestClass]
     public class GetBetDecisionsTests
     {
-        private IExecutableApplication _app;
+        private IProcessor _app;
         private Mock<IStockDataProvider> _mockStockDataProvider;
         private Mock<IInvestDecider> _mockInvestDecider;
         private Mock<IStockFilter> _mockStockFilter;
-        private Mock<ICommandSender> _mockCommandBus;
+        private Mock<ICommandBus> _mockCommandBus;
         private Mock<IUpdate> _mockPriceUpdate;
         private Fixture _fixture;
 
@@ -27,7 +28,7 @@ namespace SpreadBet.Tests.Application
             _mockStockDataProvider = new Mock<IStockDataProvider>();
             _mockInvestDecider = new Mock<IInvestDecider>();
             _mockStockFilter = new Mock<IStockFilter>();
-            _mockCommandBus = new Mock<ICommandSender>();
+            _mockCommandBus = new Mock<ICommandBus>();
             _mockPriceUpdate = new Mock<IUpdate>();
             _app = new GetBetDecisions(
                 _mockStockDataProvider.Object,
@@ -54,7 +55,7 @@ namespace SpreadBet.Tests.Application
             _mockInvestDecider.Setup(x => x.GetInvestmentDescisions(stocks)).Returns(new List<Bet> { bet });   
 
             // Act
-            _app.Run();
+            _app.Start();
 
             // Assert
             _mockStockDataProvider.VerifyAll();
