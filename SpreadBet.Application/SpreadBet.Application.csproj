@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloseBetDecisions.cs" />
     <Compile Include="GatherPriceData.cs" />
     <Compile Include="GetBetDecisions.cs" />
     <Compile Include="MigrateDatabase.cs" />

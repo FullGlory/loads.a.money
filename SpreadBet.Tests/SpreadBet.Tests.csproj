@@ -52,11 +52,13 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\CloseBetDecisionsTests.cs" />
     <Compile Include="Application\GetBetDecisionsTests.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CompositeStockFilterTests.cs" />
     <Compile Include="CompositeExitDeciderTests.cs" />
+    <Compile Include="Domain.CommandHandlers\CloseCommandHandlerTests.cs" />
     <Compile Include="ExitOnReEvaluatingInvestDecisionTests.cs" />
     <Compile Include="DecisionByGrowthAndCurrentPosition..cs" />
     <Compile Include="Domain.CommandHandlers\BetCommandHandlerTests.cs" />
@@ -91,6 +93,10 @@
     <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
       <Project>{70BF6160-D9BA-40DC-8982-3BE574C30F17}</Project>
       <Name>SpreadBet.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Infrastructure.Json\SpreadBet.Infrastructure.Json.csproj">
+      <Project>{3EC0876E-5DB2-4B99-B2FE-4633C7D67226}</Project>
+      <Name>SpreadBet.Infrastructure.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Infrastructure\SpreadBet.Infrastructure.csproj">
       <Project>{5104a584-d0e5-47b0-a2ec-8e575de5f28b}</Project>

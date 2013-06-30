@@ -44,5 +44,10 @@ namespace SpreadBet.Common.Components
         {
             _repository.SaveOrUpdate<StockPrice>(stockPrice);
         }
-	}
+
+        public Stock GetStock(string identifier)
+        {
+            return this._repository.Get<Stock>(s => s.Identifier.Equals(identifier));
+        }
+    }
 }

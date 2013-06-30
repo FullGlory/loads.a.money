@@ -90,8 +90,16 @@
 
                 _driver.WebDriver.Route(_settings.BaseUrl, _settings.Page, "spread.trade", param);
 
+                // Scrape exit price
+                var td = (bet.Direction == Direction.Increase) ? "0" : "1";
+                var exitPrice = Convert.ToDecimal(_driver.WebDriver.FindElements(By.CssSelector("#AccountSummary tbody tr:nth-child(" + td + ") td"))[0].Text);
+
                 // Submit
                 _driver.WebDriver.FindElementById("ConfirmBtn").Click();
+
+                // Update entity
+                bet.ExitPrice = exitPrice;
+                bet.ExitedOn = DateTime.Now;
 
                 // Confirm
                 return _driver.WebDriver.VerifyRoute(_settings.BaseUrl, _settings.Page, "spread.trade.pending.confirm", param);

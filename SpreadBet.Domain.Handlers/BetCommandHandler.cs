@@ -9,27 +9,31 @@
 
     public class BetCommandHandler : ICommandHandler<PlaceBetCommand>
     {
+        private readonly IPortfolioDataProvider _portfolioDataProvider;
         private readonly IAccountDataProvider _accountDataProvider;
-        private readonly IRepository _repository;
+        private readonly IStockDataProvider _stockDataProvider;
         private readonly IBetController _betController;
 
         public BetCommandHandler(
-            IAccountDataProvider accountDataProvider, 
-            IRepository repository, 
+            IPortfolioDataProvider portfolioDataProvider, 
+            IAccountDataProvider accountDataProvider,
+            IStockDataProvider stockDataProvider, 
             IBetController betController)
         {
+            Condition.Requires(portfolioDataProvider).IsNotNull();
             Condition.Requires(accountDataProvider).IsNotNull();
-            Condition.Requires(repository).IsNotNull();
+            Condition.Requires(stockDataProvider).IsNotNull();
             Condition.Requires(betController).IsNotNull();
 
             this._accountDataProvider = accountDataProvider;
-            this._repository = repository;
+            this._portfolioDataProvider = portfolioDataProvider;
+            this._stockDataProvider = stockDataProvider;
             this._betController = betController;
         }
 
         public void Handle(PlaceBetCommand command)
         {
-            var stock = this._repository.Get<Stock>(s => s.Identifier.Equals(command.StockIdentifier));
+            var stock = this._stockDataProvider.GetStock(command.StockIdentifier);
 
             var bet = new Bet
             {
@@ -46,7 +50,7 @@
 
             if (result)
             {
-                // TODO - save bet, raise an event to do this later.....?
+                this._portfolioDataProvider.SaveBet(bet);
             }
         }
 

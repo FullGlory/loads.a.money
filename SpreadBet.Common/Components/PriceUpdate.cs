@@ -43,5 +43,22 @@
                 }
             }
         }
+
+        public void Update(IEnumerable<Bet> bets)
+        {
+            foreach (var bet in bets)
+            {
+                var latestPrice = this._automationProvider.Latest(bet.Stock);
+
+                if (latestPrice != null)
+                {
+                    var period = _repository.GetAll<Period>().Last();
+                    var sp = _repository.GetAll<StockPrice>(x => x.Period.Id == period.Id && x.Stock.Identifier == bet.Stock.Identifier).FirstOrDefault();
+                    sp.Price.Bid = latestPrice.Bid;
+                    sp.Price.Offer = latestPrice.Offer;
+                    this._stockDataProvider.UpdateStockPrice(sp);
+                }
+            }
+        }
     }
 }

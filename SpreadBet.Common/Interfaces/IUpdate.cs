@@ -6,5 +6,6 @@
     public interface IUpdate
     {
         void Update(IEnumerable<Stock> stocks);
+        void Update(IEnumerable<Bet> bets);
     }
 }

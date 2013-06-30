@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Common", "SpreadBet.Common\SpreadBet.Common.csproj", "{70D49911-0FB7-4292-9954-8D9AAA5B848F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Tests", "SpreadBet.Tests\SpreadBet.Tests.csproj", "{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}"
