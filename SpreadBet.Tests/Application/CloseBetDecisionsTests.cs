@@ -16,11 +16,9 @@
     public class CloseBetDecisionsTests
     {
         private IProcessor _app;
-        private ICommandBus _commandBus;
+        private Mock<ICommandBus> _mockCommandBus;
         private Mock<IPortfolioDataProvider> _mockPortfolioDataProvider;
         private Mock<IExitDecider> _mockExitDecider;
-        private Mock<IMessageSender> _mockMessageSender;
-        private Mock<ITextSerialiser> _mockTextSerialiser;
         private Mock<IUpdate> _mockPriceUpdate;
         private Fixture _fixture;
 
@@ -29,15 +27,13 @@
         {
             _mockPortfolioDataProvider = new Mock<IPortfolioDataProvider>();
             _mockExitDecider = new Mock<IExitDecider>();
-            _mockMessageSender = new Mock<IMessageSender>();
-            _mockTextSerialiser = new Mock<ITextSerialiser>();
             _mockPriceUpdate = new Mock<IUpdate>();
+            _mockCommandBus = new Mock<ICommandBus>();
 
-            _commandBus = new CommandBus(_mockMessageSender.Object, _mockTextSerialiser.Object);
             _app = new CloseBetDecisions(
                 _mockPortfolioDataProvider.Object,
                 _mockExitDecider.Object,
-                _commandBus,
+                _mockCommandBus.Object,
                 _mockPriceUpdate.Object);
 
             _fixture = new Fixture();
@@ -53,7 +49,6 @@
             _mockPortfolioDataProvider.Setup(x => x.GetCurrentBets()).Returns(bets);
             _mockPriceUpdate.Setup(x => x.Update(bets));
             _mockExitDecider.Setup(x => x.GetExitDescisions(bets)).Returns(bets);
-            _mockMessageSender.Setup(x => x.Send(It.IsAny<Message>()));
 
             // Act
             _app.Start();
@@ -62,9 +57,7 @@
             _mockPortfolioDataProvider.VerifyAll();
             _mockPriceUpdate.VerifyAll();
             _mockExitDecider.VerifyAll();
-            _mockMessageSender.VerifyAll();
+            _mockCommandBus.Verify(x => x.Send(It.Is<Envelope<ICommand>>(e => (e.Body as CloseBetCommand).BetId == bet.Id)), Times.Once());           
         }
-
-
     }
 }

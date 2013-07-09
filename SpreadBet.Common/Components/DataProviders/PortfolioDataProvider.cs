@@ -56,5 +56,11 @@ namespace SpreadBet.Common.Components
 				(bet.PlacedOn ?? DateTime.MinValue) < DateTime.UtcNow && 
 				(bet.ExitedOn == null), b => b.Stock);
 		}
-	}
+
+
+        public Bet Get(int id)
+        {
+            return this._repository.Get<Bet>(b=>b.Id == id);
+        }
+    }
 }

@@ -1,7 +1,5 @@
 ﻿namespace SpreadBet.Tests.Domain.CommandHandlers
 {
-    using System;
-    using System.Linq.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Ploeh.AutoFixture;
@@ -10,7 +8,6 @@
     using SpreadBet.Domain.Commands;
     using SpreadBet.Domain.Handlers;
     using SpreadBet.Infrastructure.Messaging.Handlers;
-    using SpreadBet.Repository;
 
     [TestClass]
     public class CloseCommandHandlerTests
@@ -35,16 +32,22 @@
         public void Execute_BetAndStockValid_BetPlacedAndStored()
         {
             // Arrange
-            var cmd = _fixture.Create<CloseBetCommand>();
+            var bet = _fixture.Create<Bet>();
+            var cmd = _fixture.Build<CloseBetCommand>()
+                              .With(x=>x.BetId, bet.Id)
+                              .Create();
+            
+            _portfolioDataProvider.Setup(x=>x.Get(bet.Id)).Returns(bet);
 
-            _mockBetController.Setup(x => x.Close(cmd.Bet)).Returns(true);
+            _mockBetController.Setup(x => x.Close(bet)).Returns(true);
 
             // Act
             _handler.Handle(cmd);
 
             // Assert
-            _mockBetController.Verify(x => x.Close(cmd.Bet), Times.Once());
-            _portfolioDataProvider.Verify(x => x.SaveBet(cmd.Bet), Times.Once());
+            _portfolioDataProvider.VerifyAll();
+            _mockBetController.Verify(x => x.Close(bet), Times.Once());
+            _portfolioDataProvider.Verify(x => x.SaveBet(bet), Times.Once());
         }
     }
 }

@@ -25,11 +25,13 @@
 
         public void Handle(CloseBetCommand command)
         {
-            var result = this._betController.Close(command.Bet);
+            var bet = this._portfolioDataProvider.Get(command.BetId);
+
+            var result = this._betController.Close(bet);
 
             if (result)
             {
-                _portfolioDataProvider.SaveBet(command.Bet);
+                _portfolioDataProvider.SaveBet(bet);
             }
         }
 

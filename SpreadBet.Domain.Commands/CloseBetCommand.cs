@@ -4,6 +4,6 @@
 
     public class CloseBetCommand : ICommand
     {
-        public Bet Bet { get; set; }
+        public int BetId { get; set; }
     }
 }

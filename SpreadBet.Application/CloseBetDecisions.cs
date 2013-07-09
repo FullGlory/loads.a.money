@@ -63,7 +63,7 @@ namespace SpreadBet.Application
                 // Create a command to represent an update to the domain
                 var command = new CloseBetCommand
                 {
-                    Bet = bet,
+                    BetId = bet.Id,
                 };
 
                 // Send the command for processing

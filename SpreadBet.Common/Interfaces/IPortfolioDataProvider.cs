@@ -6,11 +6,7 @@
 
 namespace SpreadBet.Common.Interfaces
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using SpreadBet.Common.Entities;
+    using System.Collections.Generic;
     using SpreadBet.Domain;
 
 	public interface IPortfolioDataProvider
@@ -22,5 +18,7 @@ namespace SpreadBet.Common.Interfaces
         IEnumerable<Bet> GetUnplacedBets();
 
 		IEnumerable<Bet> GetCurrentBets();
+
+        Bet Get(int id);
     }
 }
