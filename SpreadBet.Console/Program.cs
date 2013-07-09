@@ -6,14 +6,15 @@
 	{
 		static void Main(string[] args)
 		{
-            var processor = new TradingProcessor();
+            using (var processor = new TradingProcessor())
+            {
+                processor.Start();
 
-            processor.Start();
+                System.Console.WriteLine("Press any key to stop");
+                System.Console.ReadLine();
 
-            System.Console.WriteLine("Press any key to stop");
-            System.Console.ReadLine();
-
-            processor.Stop();
+                processor.Stop();
+            }
 		}
 	}
 }
