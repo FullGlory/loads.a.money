@@ -89,7 +89,6 @@
     <Compile Include="Interfaces\IAutomationProvider.cs" />
     <Compile Include="Interfaces\IAutomationSettings.cs" />
     <Compile Include="Interfaces\IBetController.cs" />
-    <Compile Include="Interfaces\IExecutableApplication.cs" />
     <Compile Include="Interfaces\IExitDecider.cs" />
     <Compile Include="Interfaces\IInvestDecider.cs" />
     <Compile Include="Interfaces\IAccountDataProvider.cs" />
