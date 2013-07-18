@@ -97,13 +97,11 @@
       <Project>{007d45eb-8e80-4060-8a64-61ec305d6f77}</Project>
       <Name>SpreadBet.Processor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpreadBet.Repository\SpreadBet.Repository.csproj">
-      <Project>{48EB7A1A-D47F-4A89-BA92-0D1F592FF3A8}</Project>
-      <Name>SpreadBet.Repository</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

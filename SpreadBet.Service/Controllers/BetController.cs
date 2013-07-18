@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SpreadBet.Domain;
-using SpreadBet.Repository;
+using SpreadBet.Domain.Interfaces;
 
 namespace SpreadBet.Service.Controllers
 {

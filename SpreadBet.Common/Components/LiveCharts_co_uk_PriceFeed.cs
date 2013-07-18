@@ -17,7 +17,7 @@ namespace SpreadBet.Common.Components
 	using System.Threading.Tasks;
 	using CuttingEdge.Conditions;
     using SpreadBet.Domain;
-    using SpreadBet.Repository;
+    using SpreadBet.Domain.Interfaces;
 
 	/// <summary>
 	/// TODO: Update summary.
@@ -79,8 +79,7 @@ namespace SpreadBet.Common.Components
 
 			var stockPrices = new List<StockPrice>();
 
-            //HACK - The intialisation of DbContext in EF is not thread-safe, so restrict parallelism (for now) !!
-			Parallel.ForEach<string>(GetPageUrls(), new ParallelOptions{MaxDegreeOfParallelism=1},(url, state)  =>
+            Parallel.ForEach<string>(GetPageUrls(), (url, state) =>
 			{
 				Console.WriteLine("crawling url " + url);
 

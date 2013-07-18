@@ -1,11 +1,9 @@
-﻿using SpreadBet.Domain;
-using System.Linq;
-using System.Collections.Generic;
-using System;
-using System.Linq.Expressions;
-
-namespace SpreadBet.Repository
+﻿namespace SpreadBet.Domain.Interfaces
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+
     public interface IRepository
 	{
         T Get<T>(Expression<Func<T, bool>> where) where T : Entity;

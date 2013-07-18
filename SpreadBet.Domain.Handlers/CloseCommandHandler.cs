@@ -5,7 +5,6 @@
     using SpreadBet.Domain.Commands;
     using SpreadBet.Infrastructure.Messaging;
     using SpreadBet.Infrastructure.Messaging.Handlers;
-    using SpreadBet.Repository;
 
     public class CloseCommandHandler : ICommandHandler<CloseBetCommand>
     {

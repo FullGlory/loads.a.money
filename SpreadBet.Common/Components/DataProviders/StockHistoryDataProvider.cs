@@ -4,7 +4,7 @@ using CuttingEdge.Conditions;
 using SpreadBet.Common.Entities;
 using SpreadBet.Common.Interfaces;
 using SpreadBet.Domain;
-using SpreadBet.Repository;
+using SpreadBet.Domain.Interfaces;
 
 namespace SpreadBet.Common.Components
 {

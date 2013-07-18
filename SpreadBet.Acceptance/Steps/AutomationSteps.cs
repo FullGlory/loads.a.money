@@ -1,15 +1,15 @@
 ﻿namespace SpreadBet.Acceptance.Steps
 {
-    using TechTalk.SpecFlow;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.Practices.Unity;
+    using NUnit.Framework;
     using SpreadBet.Acceptance.Extensions;
     using SpreadBet.Common.Interfaces;
-    using Microsoft.Practices.Unity;
     using SpreadBet.Domain;
-    using NUnit.Framework;
-    using System.Collections.Generic;
-    using System;
-    using System.Linq;
-    using SpreadBet.Repository;
+    using SpreadBet.Domain.Interfaces;
+    using TechTalk.SpecFlow;
 
     [Binding]
     public class AutomationSteps

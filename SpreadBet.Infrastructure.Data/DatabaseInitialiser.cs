@@ -1,9 +1,9 @@
-﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-
-namespace SpreadBet.Repository
+﻿namespace SpreadBet.Infrastructure.Data
 {
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+
     public class DatabaseInitializer
     {
         public DatabaseInitializer(Context ctx)

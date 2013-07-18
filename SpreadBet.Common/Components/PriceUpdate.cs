@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Collections.Generic;
     using CuttingEdge.Conditions;
-    using SpreadBet.Repository;
+    using SpreadBet.Domain.Interfaces;
 
     public class PriceUpdate : IUpdate
     {

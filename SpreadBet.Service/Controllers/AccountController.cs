@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using System.Web.Http;
-using SpreadBet.Repository;
 using SpreadBet.Domain;
 using System.Web.Security;
 using System.Net.Http;
 using System.Net;
 using System;
 using System.Collections.Generic;
+using SpreadBet.Domain.Interfaces;
 
 namespace SpreadBet.Service.Controllers
 {

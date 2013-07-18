@@ -1,7 +1,7 @@
 ﻿namespace SpreadBet.Application
 {
     using SpreadBet.Infrastructure;
-    using SpreadBet.Repository;
+    using SpreadBet.Infrastructure.Data;
 
     public class MigrateDatabase : IProcessor
     {

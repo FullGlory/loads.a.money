@@ -1,7 +1,5 @@
 ﻿namespace SpreadBet.Tests.Domain.CommandHandlers
 {
-    using System;
-    using System.Linq.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Ploeh.AutoFixture;
@@ -10,7 +8,6 @@
     using SpreadBet.Domain.Commands;
     using SpreadBet.Domain.Handlers;
     using SpreadBet.Infrastructure.Messaging.Handlers;
-    using SpreadBet.Repository;
 
     [TestClass]
     public class BetCommandHandlerTests

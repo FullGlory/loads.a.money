@@ -9,8 +9,7 @@
     using System.Collections.Generic;
     using SpreadBet.Common.Exceptions;
     using SpreadBet.Common.Entities;
-    using SpreadBet.Repository;
-    using System.Linq;
+        using System.Linq;
 
     public class BullBearingsController : IBetController
     {

@@ -16,6 +16,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -196,13 +200,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpreadBet.Domain.Interfaces\SpreadBet.Domain.Interfaces.csproj">
+      <Project>{1a618831-697f-4c99-a0d5-ae6ef9bd1bed}</Project>
+      <Name>SpreadBet.Domain.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
       <Project>{70BF6160-D9BA-40DC-8982-3BE574C30F17}</Project>
       <Name>SpreadBet.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpreadBet.Repository\SpreadBet.Repository.csproj">
-      <Project>{48EB7A1A-D47F-4A89-BA92-0D1F592FF3A8}</Project>
-      <Name>SpreadBet.Repository</Name>
+    <ProjectReference Include="..\SpreadBet.Infrastructure.Data\SpreadBet.Infrastructure.Data.csproj">
+      <Project>{2f0f4ab5-b615-4bd3-adae-638e4de1ef1b}</Project>
+      <Name>SpreadBet.Infrastructure.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

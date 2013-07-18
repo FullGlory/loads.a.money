@@ -1,8 +1,8 @@
-﻿using System.Data.Entity.Migrations;
-using SpreadBet.Domain;
-
-namespace SpreadBet.Repository
+﻿namespace SpreadBet.Infrastructure.Data
 {
+    using System.Data.Entity.Migrations;
+    using SpreadBet.Domain;
+
     public class Configuration : DbMigrationsConfiguration<Context>
     {
         public Configuration()

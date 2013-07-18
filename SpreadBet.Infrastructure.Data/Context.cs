@@ -1,12 +1,9 @@
-﻿using SpreadBet.Domain;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Reflection;
-using System.Data.Entity.Infrastructure;
-
-namespace SpreadBet.Repository
+﻿namespace SpreadBet.Infrastructure.Data
 {
+    using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
+    using SpreadBet.Domain;
+
 	public class Context : DbContext
     {
         public Context() : base("SpreadBet") 

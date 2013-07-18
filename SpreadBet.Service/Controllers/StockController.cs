@@ -1,9 +1,9 @@
-﻿using System.Web.Http;
-using SpreadBet.Domain;
-using SpreadBet.Repository;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Collections.Generic;
+using System.Net.Http;
+using System.Web.Http;
+using SpreadBet.Domain;
+using SpreadBet.Domain.Interfaces;
 
 namespace SpreadBet.Service.Controllers
 {

@@ -11,9 +11,9 @@ namespace SpreadBet.Common.Components
 	using System.Linq;
 	using System.Text;
 	using SpreadBet.Common.Interfaces;
-	using SpreadBet.Repository;
 	using CuttingEdge.Conditions;
     using SpreadBet.Domain;
+    using SpreadBet.Domain.Interfaces;
 
 	/// <summary>
 	/// TODO: Update summary.

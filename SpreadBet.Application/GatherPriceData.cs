@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using SpreadBet.Common.Interfaces;
 using CuttingEdge.Conditions;
-using SpreadBet.Repository;
 using SpreadBet.Infrastructure;
 
 namespace SpreadBet.Application
