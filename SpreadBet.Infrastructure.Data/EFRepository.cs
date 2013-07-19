@@ -57,16 +57,9 @@
 		{
             using (var ctx = new Context())
             {
-                if (ctx.Entry(entity).State == EntityState.Detached)
-                {
-                    ctx.Set<T>().Add(entity);
-                }
-                else
-                {
-                    ctx.Entry(entity).State = EntityState.Modified;
-                }
+              ctx.Entry(entity).State = (entity.Id == 0) ? EntityState.Added : EntityState.Modified;
 
-                ctx.SaveChanges();
+              ctx.SaveChanges();
             }
 		}
 

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SpreadBet.Domain;
 using SpreadBet.Domain.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SpreadBet.Infrastructure.Data.IntegrationTests
 {
@@ -19,12 +20,14 @@ namespace SpreadBet.Infrastructure.Data.IntegrationTests
         }
 
         [Test]
-        public void CanSaveAndRetrieveEntities()
+        public void ShouldSaveAndRetrieveEntities()
         {
             // Arrange
+          var seed = Guid.NewGuid().ToString();
             var account = new Account
             {
-                Deposit = 69
+                Deposit = 69,
+                Username = seed
             };
 
             // Act
@@ -32,11 +35,34 @@ namespace SpreadBet.Infrastructure.Data.IntegrationTests
 
             // Assert
             Assert.AreNotEqual(0, account.Id);
-            Assert.IsNotNull(this._repository.Get<Account>(a => a.Deposit == 69));
+            Assert.IsNotNull(this._repository.Get<Account>(a => a.Username == seed));
         }
 
         [Test]
-        public void Get_CalledCurrently_DoesNotBlowUp()
+        public void ShouldUpdateEntities()
+        {
+          // Arrange
+          var count = this._repository.GetAll<Account>().Count();
+
+          var account = new Account
+          {
+            Deposit = 69
+          };
+
+          // Create it
+          this._repository.SaveOrUpdate(account);
+
+          account.Deposit += 1;
+
+          // Act
+          this._repository.SaveOrUpdate(account);
+
+          // Assert
+          Assert.AreEqual(count+1, this._repository.GetAll<Account>().Count());
+        }
+
+        [Test]
+        public void ShouldBeAbleToCallRepositoryConcurrently()
         {
             // Arrange
             var tasks = new List<Task>();
