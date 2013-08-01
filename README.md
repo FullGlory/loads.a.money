@@ -37,3 +37,18 @@ Current Online Services
 -----------------------
 >**BullBearings** - Provides the ability to place bets
 >**LiveChars.co.uk** - Online site containing stocks and prices. 
+
+Environment
+===========
+Build Server:
+*Windows Server 2008 R2
+*Jenkins
+**Plugins:
+***Copy Artifact
+***Build Radiator
+***GitHub
+***MSBuild
+***NUnit Publisher
+*Chocolatey (see http://chocolatey.org/)
+**Packages:
+***Git (Install) 1.8.3
