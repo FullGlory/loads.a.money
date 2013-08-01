@@ -59,6 +59,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Automation.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\GatherPriceData.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GatherPriceData.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\AutomationSteps.cs" />
   </ItemGroup>
@@ -101,6 +106,10 @@
     <None Include="Features\Automation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Automation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\GatherPriceData.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GatherPriceData.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
