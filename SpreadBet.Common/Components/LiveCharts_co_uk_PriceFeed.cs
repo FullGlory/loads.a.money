@@ -27,15 +27,23 @@ namespace SpreadBet.Common.Components
 		private readonly List<string> _listUrls;
 		private readonly IScraper _scraper;
         private readonly IRepository _repository;
+		private readonly int _timePeriodLengthSecs;
 
-		public LiveCharts_co_uk_PriceFeed(IScraper scraper, IRepository repository)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="LiveCharts_co_uk_PriceFeed"/> class.
+		/// </summary>
+		/// <param name="scraper">The scraper.</param>
+		/// <param name="repository">The repository.</param>
+		/// <param name="timePeriodLengthSecs">The time period length secs.</param>
+		public LiveCharts_co_uk_PriceFeed(IScraper scraper, IRepository repository, int timePeriodLengthSecs)
 		{
-            // FOR FUCKS SAKE!!!!!
 			Condition.Requires(scraper).IsNotNull();
             Condition.Requires(repository).IsNotNull();
+			Condition.Requires(timePeriodLengthSecs).IsGreaterThan(0);
 
             this._repository = repository;
 			this._scraper = scraper;
+			this._timePeriodLengthSecs = timePeriodLengthSecs;
 				
 			#region Set starting urls
 
@@ -73,17 +81,19 @@ namespace SpreadBet.Common.Components
 			#endregion
 		}
 
+		/// <summary>
+		/// Gets the stock prices.
+		/// </summary>
+		/// <returns></returns>
 		public IEnumerable<StockPrice> GetStockPrices()
 		{
-			var timePeriod = TimePeriodHelper.GetTimePeriod(DateTime.UtcNow);
-
 			var stockPrices = new List<StockPrice>();
 
             Parallel.ForEach<string>(GetPageUrls(), (url, state) =>
 			{
 				Console.WriteLine("crawling url " + url);
 
-				var stock = ReadStockPrices(url, timePeriod);
+				var stock = ReadStockPrices(url, this._timePeriodLengthSecs);
 
 				if (stock != null)
 				{
@@ -138,7 +148,7 @@ namespace SpreadBet.Common.Components
 			return retVal;
 		}
 
-		private StockPrice ExtractStockData(string content, int timePeriod)
+		private StockPrice ExtractStockData(string content, int timePeriodLengthSecs)
 		{
 			var nameExp = "(?ismx)" + 
 						  "<h2[^>]*?class\\s?=\\s?[\\\"\\']title[\\\"\\'][^>]*?>[^<]*?" + 
@@ -169,10 +179,23 @@ namespace SpreadBet.Common.Components
 			var bid = Regex.Match(content, string.Format(valExp, "bid")).Groups["value"].Value;
 			var offer = Regex.Match(content, string.Format(valExp, "offer")).Groups["value"].Value;
 			var security = Regex.Match(content, string.Format(valExp, "security")).Groups["value"].Value;
-            var newPeriod = new Period();
-            newPeriod.Id = timePeriod;
-            newPeriod.From = DateTime.Now;
-            newPeriod.To = DateTime.Now.AddHours(1);
+
+			var changeDateExp = "(?ismx)" +
+								"<th[^>]*?>\\s*last\\schange[^<]*</\\s?th>[^<]*?<td[^>]*?>" +
+								"(?<month>\\d+)\\s*.\\s*" +
+								"(?<day>\\d+)\\s*.\\s*" +
+								"(?<hour>\\d+)\\s*.\\s*" +
+								"(?<min>\\d+)";
+
+			var changeDateMatch = Regex.Match(content, changeDateExp);
+			var dateTime = new DateTime(DateTime.Now.Year,
+										int.Parse(changeDateMatch.Groups["month"].Value),
+										int.Parse(changeDateMatch.Groups["day"].Value),
+										int.Parse(changeDateMatch.Groups["min"].Value),
+										int.Parse(changeDateMatch.Groups["min"].Value),
+										0);
+
+			var period = TimePeriodHelper.GetTimePeriod(dateTime, timePeriodLengthSecs);
 
             var stock = _repository.Get<Stock>(s=>s.Identifier.Equals(symb));
             if (stock == null)
@@ -182,7 +205,7 @@ namespace SpreadBet.Common.Components
 			
             return new StockPrice
 			{
-				Period = newPeriod,
+				Period = period,
 				UpdatedAt = DateTime.UtcNow,
                 Stock = stock,
 				Price = new Price
