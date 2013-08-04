@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <BeforeSmokeTestDependsOn>
+      $(BeforeSmokeTestDependsOn);
+      UpdateAcceptanceTestConfiguration;
+    </BeforeSmokeTestDependsOn>
+  </PropertyGroup>
+  <Target Name="BeforeSmokeTest" DependsOnTargets="$(BeforeSmokeTestDependsOn)">
+    <Message Text="BeforeSmokeTest (pipeline.plugin.nunit.config)"/>
+  </Target>
+
+  <PropertyGroup>
+    <BeforeIntegrationTestDependsOn>
+      $(BeforeIntegrationTestDependsOn);
+      UpdateIntegrationTestConfiguration;
+    </BeforeIntegrationTestDependsOn>
+  </PropertyGroup>
+  <Target Name="BeforeIntegrationTest" DependsOnTargets="$(BeforeIntegrationTestDependsOn)">
+    <Message Text="BeforeIntegrationTest (pipeline.plugin.nunit.config)"/>
+  </Target>
+
+  <Target Name="UpdateIntegrationTestConfiguration">
+    <Message Text="UpdateIntegrationTestConfiguration  (pipeline.plugin.nunit.config)"/>
+
+    <ItemGroup>
+      <TestAssemblyFiles Include="$(ArtifactTestFolder)\**\*IntegrationTests.dll"></TestAssemblyFiles>
+    </ItemGroup>
+
+    <ConfigurationUpdater SourceFiles="@(TestAssemblyFiles->'%(Identity).environment.config')"
+                          DestinationFiles="@(TestAssemblyFiles->'%(Identity).config')"
+                          Environment="$(PipelineStage)"/>
+
+  </Target>  
+
+
+  <Target Name="UpdateAcceptanceTestConfiguration">
+    <Message Text="UpdateAcceptanceTestConfiguration (pipeline.plugin.nunit)"/>
+
+    <ItemGroup>
+      <TestAssemblyFiles Include="$(ArtifactTestFolder)\**\*AcceptanceTests.dll"></TestAssemblyFiles>
+    </ItemGroup>  
+
+    <ConfigurationUpdater SourceFiles="@(TestAssemblyFiles->'%(Identity).environment.config')"
+                          DestinationFiles="@(TestAssemblyFiles->'%(Identity).config')"
+                          Environment="$(PipelineStage)"/>
+
+  </Target>  
+
+</Project>
