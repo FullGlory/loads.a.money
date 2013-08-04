@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Common", "SpreadBet.Common\SpreadBet.Common.csproj", "{70D49911-0FB7-4292-9954-8D9AAA5B848F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Tests", "SpreadBet.Tests\SpreadBet.Tests.csproj", "{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37EF78CB-02B4-4FCE-BABB-E23D3139D6BD}"
 	ProjectSection(SolutionItems) = preProject
 		loads.a.money1.vsmdi = loads.a.money1.vsmdi
@@ -44,6 +42,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Infrastructure.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Domain.Interfaces", "SpreadBet.Domain.Interfaces\SpreadBet.Domain.Interfaces.csproj", "{1A618831-697F-4C99-A0D5-AE6EF9BD1BED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.UnitTests", "SpreadBet.UnitTests\SpreadBet.UnitTests.csproj", "{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B2CF7164-7ABD-4689-A7C5-7CF12CAB6A01}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = loads.a.money1.vsmdi
@@ -67,16 +72,6 @@ Global
 		{70D49911-0FB7-4292-9954-8D9AAA5B848F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{70D49911-0FB7-4292-9954-8D9AAA5B848F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{70D49911-0FB7-4292-9954-8D9AAA5B848F}.Release|x86.ActiveCfg = Release|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Release|Any CPU.Build.0 = Release|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{664ADCC1-0FB9-4C7E-BA5F-C95194A9D017}.Release|x86.ActiveCfg = Release|Any CPU
 		{FFDDFAF8-F5CA-44F6-A7ED-4183DD12B96A}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{FFDDFAF8-F5CA-44F6-A7ED-4183DD12B96A}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{FFDDFAF8-F5CA-44F6-A7ED-4183DD12B96A}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -237,6 +232,16 @@ Global
 		{1A618831-697F-4C99-A0D5-AE6EF9BD1BED}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1A618831-697F-4C99-A0D5-AE6EF9BD1BED}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1A618831-697F-4C99-A0D5-AE6EF9BD1BED}.Release|x86.ActiveCfg = Release|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
