@@ -1,4 +1,4 @@
-﻿namespace SpreadBet.Tests.Domain.CommandHandlers
+﻿namespace SpreadBet.UnitTests.Domain.CommandHandlers
 {
     using NUnit.Framework;
     using Moq;

@@ -9,7 +9,7 @@ using Moq;
 using SpreadBet.Common.Components;
 using SpreadBet.Domain;
 
-namespace SpreadBet.Tests
+namespace SpreadBet.UnitTests.Common
 {
 	[TestFixture]
 	public class ExitOnReEvaluatingInvestDecisionTests

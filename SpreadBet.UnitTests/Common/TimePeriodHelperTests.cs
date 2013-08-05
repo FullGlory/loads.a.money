@@ -5,7 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 using SpreadBet.Common.Helpers;
 
-namespace SpreadBet.Tests
+namespace SpreadBet.UnitTests.Common
 {
 	[TestFixture]
 	public class TimePeriodHelperTests

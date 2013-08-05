@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using SpreadBet.Infrastructure.Messaging;
 
-namespace SpreadBet.Tests.Infrastructure.Messaging
+namespace SpreadBet.UnitTests.Infrastructure.Messaging
 {
     [TestFixture]
     public class EnvelopeTests

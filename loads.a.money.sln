@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B2CF71
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.AcceptanceTests", "SpreadBet.AcceptanceTests\SpreadBet.AcceptanceTests.csproj", "{C53C2392-EC43-473D-AADB-19A0528E1C47}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = loads.a.money1.vsmdi
@@ -242,6 +244,16 @@ Global
 		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{45C4C88E-C9BB-4742-BF1A-9C286DBA8366}.Release|x86.ActiveCfg = Release|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C53C2392-EC43-473D-AADB-19A0528E1C47}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

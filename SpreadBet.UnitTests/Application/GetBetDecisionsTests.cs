@@ -1,4 +1,4 @@
-﻿namespace SpreadBet.Tests.Application
+﻿namespace SpreadBet.UnitTests.Application
 {
     using System.Collections.Generic;
     using NUnit.Framework;

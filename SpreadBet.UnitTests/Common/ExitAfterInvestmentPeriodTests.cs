@@ -6,7 +6,7 @@ using NUnit.Framework;
 using SpreadBet.Domain;
 using SpreadBet.Common.Components;
 
-namespace SpreadBet.Tests
+namespace SpreadBet.UnitTests.Common
 {
 	[TestFixture]
 	public class ExitAfterInvestmentPeriodTests

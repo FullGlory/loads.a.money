@@ -14,4 +14,14 @@
     </DotNetBuildConfiguration>
   </ItemGroup>
 
+  <PropertyGroup>
+    <CorePackageDependsOn>
+      PackageTests;
+    </CorePackageDependsOn>
+  </PropertyGroup>
+  <Target Name="CorePackage" 
+          DependsOnTargets="$(CorePackageDependsOn)">
+    <Message Text="CorePackage (build)"/>
+  </Target>  
+
 </Project>
