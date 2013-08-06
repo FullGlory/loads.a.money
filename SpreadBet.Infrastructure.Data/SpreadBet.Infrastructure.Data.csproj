@@ -44,14 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs" />
+    <Compile Include="Initializers\MigrateConfiguration.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="DatabaseInitialiser.cs" />
     <Compile Include="EFRepository.cs" />
+    <Compile Include="Initializers\MigrateDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ReadMe.txt" />
+    <Compile Include="Initializers\RebuildDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -15,6 +15,8 @@
   <Import Project="pipeline.plugin.jenkins.xml"/>
   <Import Project="pipeline.plugin.environment.xml"/>
   <Import Project="pipeline.plugin.webdeploy.xml"/>
+  <Import Project="pipeline.plugin.windows.services.xml"/>
+  <Import Project="pipeline.plugin.consoles.xml"/>
 
   <Import Project="pipeline.stages.xml"/>
 

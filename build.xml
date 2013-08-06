@@ -3,23 +3,27 @@
 
   <PropertyGroup>
     <NUnitToolPath>$(MSBuildStartupDirectory)\packages\NUnit.Runners.2.6.2\tools\</NUnitToolPath>
+    <DatabaseMigrator>SpreadBet.Infrastructure.Data.Console</DatabaseMigrator>
   </PropertyGroup>
 
   <Import Project="pipeline\pipeline.xml"/>
 
   <ItemGroup>
+
     <DotNetBuildConfiguration Include="$(MSBuildStartupDirectory)\loads.a.money.sln">
       <FlavorToBuild>$(Configuration)</FlavorToBuild>
       <PlatformToBuild>Mixed Platforms</PlatformToBuild>
     </DotNetBuildConfiguration>
-  </ItemGroup>
 
-  <ItemGroup>
     <WindowServicePackageBuildConfiguration Include="$(MSBuildStartupDirectory)\SpreadBet.WindowsService\SpreadBet.WindowsService.csproj"/>
+
+    <ConsolePackageBuildConfiguration Include="$(MSBuildStartupDirectory)\$(DatabaseMigrator)\$(DatabaseMigrator).csproj"/>
+
   </ItemGroup>
 
   <PropertyGroup>
     <CorePackageDependsOn>
+      PackageConsoles;
       PackageWindowServices;
       PackageTests;
     </CorePackageDependsOn>
@@ -31,77 +35,29 @@
 
   <PropertyGroup>
     <CoreDeployPackageDependsOn>
+      <!-- TODO - stop anything using the db first ?? -->
+      DeployConsoles;
+      DeployDatabase; <!-- As a console is used to deploy the database (EF migrations), ensure the consle is configured BEFORE performing the "DeployDatabase" routine -->
       DeployWindowServices;
     </CoreDeployPackageDependsOn>
   </PropertyGroup>
   <Target Name="CoreDeployPackage"
           DependsOnTargets="$(CoreDeployPackageDependsOn)">
     <Message Text="CoreDeployPackage (build)"/>
-  </Target>   
+  </Target> 
 
-  <Target Name="PackageWindowServices" 
-          Outputs="%(WindowServicePackageBuildConfiguration.Identity)">
-    <Message Text="PackageWindowServices (build) (Id=%(WindowServicePackageBuildConfiguration.Identity))"/>
+  <Target Name="DeployDatabase">
+    <Message Text="DeployDatabase (build)"/>
 
-    <ItemGroup>
-      <WindowServiceSourceFiles Include="$(MSBuildStartupDirectory)\%(WindowServicePackageBuildConfiguration.Filename)\bin\$(Configuration)\*.*"/>
-      <WindowServiceComponentEnvironmentConfigurationFile Include="$(MSBuildStartupDirectory)\%(WindowServicePackageBuildConfiguration.FileName)\$(ComponentEnvironmentConfigurationFile)" />
-      <WindowServiceDeployEnvironmentConfigurationFile Include="$(MSBuildStartupDirectory)\%(WindowServicePackageBuildConfiguration.FileName)\$(DeployEnvironmentConfigurationFile)" />
-    </ItemGroup>
-
-    <!-- Copy service files -->
-    <Copy SourceFiles="@(WindowServiceSourceFiles)"
-          DestinationFolder="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)"/>
-
-    <!-- Copy Component Environment.Config file to artifact-->
-    <Copy SourceFiles="@(WindowServiceComponentEnvironmentConfigurationFile)"
-            DestinationFolder="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)"/>
-
-    <!-- Copy Deployment Environment.Config file to artifact-->
-    <Copy SourceFiles="@(WindowServiceDeployEnvironmentConfigurationFile)"
-            DestinationFolder="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)"/>
-
-  </Target>
-
-  <Target Name="DeployWindowServices" 
-          Outputs="%(WindowServicePackageBuildConfiguration.Identity)">
-    <Message Text="DeployWindowServices (build) (Id=%(WindowServicePackageBuildConfiguration.Identity))"/>
-
-      <GetConfigurationValue FileName="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\$(DeployEnvironmentConfigurationFile)"
+      <GetConfigurationValue FileName="$(ArtifactFolder)\$(ConsolesFolder)\$(DatabaseMigrator)\$(DeployEnvironmentConfigurationFile)"
                                Environment="$(PipelineStage)"
-                               Name="DropFolder">
-        <Output TaskParameter="Value" PropertyName="WindowsDropFolder"/>
+                               Name="DatabaseBuildCommand">
+        <Output TaskParameter="Value" PropertyName="DatabaseBuildCommand"/>
       </GetConfigurationValue>
 
-    <ItemGroup>
-      <WindowServiceDeploymentFiles Include="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\*.*"/>
-    </ItemGroup>   
+    <Exec WorkingDirectory="$(ArtifactFolder)\$(ConsolesFolder)\$(DatabaseMigrator)"
+          Command="$(DatabaseMigrator).exe $(DatabaseBuildCommand)" />   
 
-    <!-- Configure service config file for environment -->
-    <ConfigurationUpdater SourceFiles="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\$(ComponentEnvironmentConfigurationFile)"
-                          DestinationFiles="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\%(WindowServicePackageBuildConfiguration.FileName).exe.config"
-                          Environment="$(PipelineStage)"/>
-
-    <!-- Copy window service files to drop folder -->
-    <Copy SourceFiles="@(WindowServiceDeploymentFiles)"
-          DestinationFolder="$(WindowsDropFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)"/>  
-
-    <!-- Get the path to the InstallUtil.exe utility -->
-    <GetFrameworkPath>
-        <Output
-            TaskParameter="FrameworkVersion40Path"
-            PropertyName="FrameworkPath" />
-    </GetFrameworkPath>
-
-    <!-- Uninstall service (if present) -->
-    <Exec WorkingDirectory="$(FrameworkPath)"
-          ContinueOnError="true"
-          Command="InstallUtil.exe /u &quot;$(WindowsDropFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\%(WindowServicePackageBuildConfiguration.FileName).exe&quot;" />
-
-    <!-- Install service-->
-    <Exec WorkingDirectory="$(FrameworkPath)"
-          Command="InstallUtil.exe -i &quot;$(WindowsDropFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\%(WindowServicePackageBuildConfiguration.FileName).exe&quot;" />
-
-  </Target>
+  </Target>  
 
 </Project>
