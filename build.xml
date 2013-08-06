@@ -10,18 +10,98 @@
   <ItemGroup>
     <DotNetBuildConfiguration Include="$(MSBuildStartupDirectory)\loads.a.money.sln">
       <FlavorToBuild>$(Configuration)</FlavorToBuild>
-      <PlatformToBuild>Any CPU</PlatformToBuild>
+      <PlatformToBuild>Mixed Platforms</PlatformToBuild>
     </DotNetBuildConfiguration>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WindowServicePackageBuildConfiguration Include="$(MSBuildStartupDirectory)\SpreadBet.WindowsService\SpreadBet.WindowsService.csproj"/>
   </ItemGroup>
 
   <PropertyGroup>
     <CorePackageDependsOn>
+      PackageWindowServices;
       PackageTests;
     </CorePackageDependsOn>
   </PropertyGroup>
   <Target Name="CorePackage" 
           DependsOnTargets="$(CorePackageDependsOn)">
     <Message Text="CorePackage (build)"/>
-  </Target>  
+  </Target>
+
+  <PropertyGroup>
+    <CoreDeployPackageDependsOn>
+      DeployWindowServices;
+    </CoreDeployPackageDependsOn>
+  </PropertyGroup>
+  <Target Name="CoreDeployPackage"
+          DependsOnTargets="$(CoreDeployPackageDependsOn)">
+    <Message Text="CoreDeployPackage (build)"/>
+  </Target>   
+
+  <Target Name="PackageWindowServices" 
+          Outputs="%(WindowServicePackageBuildConfiguration.Identity)">
+    <Message Text="PackageWindowServices (build) (Id=%(WindowServicePackageBuildConfiguration.Identity))"/>
+
+    <ItemGroup>
+      <WindowServiceSourceFiles Include="$(MSBuildStartupDirectory)\%(WindowServicePackageBuildConfiguration.Filename)\bin\$(Configuration)\*.*"/>
+      <WindowServiceComponentEnvironmentConfigurationFile Include="$(MSBuildStartupDirectory)\%(WindowServicePackageBuildConfiguration.FileName)\$(ComponentEnvironmentConfigurationFile)" />
+      <WindowServiceDeployEnvironmentConfigurationFile Include="$(MSBuildStartupDirectory)\%(WindowServicePackageBuildConfiguration.FileName)\$(DeployEnvironmentConfigurationFile)" />
+    </ItemGroup>
+
+    <!-- Copy service files -->
+    <Copy SourceFiles="@(WindowServiceSourceFiles)"
+          DestinationFolder="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)"/>
+
+    <!-- Copy Component Environment.Config file to artifact-->
+    <Copy SourceFiles="@(WindowServiceComponentEnvironmentConfigurationFile)"
+            DestinationFolder="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)"/>
+
+    <!-- Copy Deployment Environment.Config file to artifact-->
+    <Copy SourceFiles="@(WindowServiceDeployEnvironmentConfigurationFile)"
+            DestinationFolder="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)"/>
+
+  </Target>
+
+  <Target Name="DeployWindowServices" 
+          Outputs="%(WindowServicePackageBuildConfiguration.Identity)">
+    <Message Text="DeployWindowServices (build) (Id=%(WindowServicePackageBuildConfiguration.Identity))"/>
+
+      <GetConfigurationValue FileName="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\$(DeployEnvironmentConfigurationFile)"
+                               Environment="$(PipelineStage)"
+                               Name="DropFolder">
+        <Output TaskParameter="Value" PropertyName="WindowsDropFolder"/>
+      </GetConfigurationValue>
+
+    <ItemGroup>
+      <WindowServiceDeploymentFiles Include="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\*.*"/>
+    </ItemGroup>   
+
+    <!-- Configure service config file for environment -->
+    <ConfigurationUpdater SourceFiles="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\$(ComponentEnvironmentConfigurationFile)"
+                          DestinationFiles="$(ArtifactFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\%(WindowServicePackageBuildConfiguration.FileName).exe.config"
+                          Environment="$(PipelineStage)"/>
+
+    <!-- Copy window service files to drop folder -->
+    <Copy SourceFiles="@(WindowServiceDeploymentFiles)"
+          DestinationFolder="$(WindowsDropFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)"/>  
+
+    <!-- Get the path to the InstallUtil.exe utility -->
+    <GetFrameworkPath>
+        <Output
+            TaskParameter="FrameworkVersion40Path"
+            PropertyName="FrameworkPath" />
+    </GetFrameworkPath>
+
+    <!-- Uninstall service (if present) -->
+    <Exec WorkingDirectory="$(FrameworkPath)"
+          ContinueOnError="true"
+          Command="InstallUtil.exe /u &quot;$(WindowsDropFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\%(WindowServicePackageBuildConfiguration.FileName).exe&quot;" />
+
+    <!-- Install service-->
+    <Exec WorkingDirectory="$(FrameworkPath)"
+          Command="InstallUtil.exe -i &quot;$(WindowsDropFolder)\Windows\%(WindowServicePackageBuildConfiguration.FileName)\%(WindowServicePackageBuildConfiguration.FileName).exe&quot;" />
+
+  </Target>
 
 </Project>

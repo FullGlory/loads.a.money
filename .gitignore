@@ -216,5 +216,6 @@ pip-log.txt
 #############
 ## Pipeline
 #############
-artefact/
+artifact/
 *-test-results.xml
+build.txt
