@@ -191,7 +191,7 @@ namespace SpreadBet.Common.Components
 			var dateTime = new DateTime(DateTime.Now.Year,
 										int.Parse(changeDateMatch.Groups["month"].Value),
 										int.Parse(changeDateMatch.Groups["day"].Value),
-										int.Parse(changeDateMatch.Groups["min"].Value),
+										int.Parse(changeDateMatch.Groups["hour"].Value),
 										int.Parse(changeDateMatch.Groups["min"].Value),
 										0);
 
