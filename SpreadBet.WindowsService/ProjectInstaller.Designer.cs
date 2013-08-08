@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
-            this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
-            // 
-            // serviceProcessInstaller1
-            // 
-            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
-            this.serviceProcessInstaller1.Password = null;
-            this.serviceProcessInstaller1.Username = null;
-            // 
-            // serviceInstaller1
-            // 
-            this.serviceInstaller1.DisplayName = "SpreadBet";
-            this.serviceInstaller1.ServiceName = "SpreadBet";
-            this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
-            // 
-            // ProjectInstaller
-            // 
-            this.Installers.AddRange(new System.Configuration.Install.Installer[] {
+      this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
+      this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
+      // 
+      // serviceProcessInstaller1
+      // 
+      this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
+      this.serviceProcessInstaller1.Password = null;
+      this.serviceProcessInstaller1.Username = null;
+      // 
+      // serviceInstaller1
+      // 
+      this.serviceInstaller1.DisplayName = "SpreadBet";
+      this.serviceInstaller1.ServiceName = "SpreadBet";
+      this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+      this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
+      // 
+      // ProjectInstaller
+      // 
+      this.Installers.AddRange(new System.Configuration.Install.Installer[] {
             this.serviceProcessInstaller1,
             this.serviceInstaller1});
 

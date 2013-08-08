@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration.Install;
 using System.Linq;
+using System.ServiceProcess;
 
 namespace SpreadBet.WindowsService
 {
@@ -13,6 +14,12 @@ namespace SpreadBet.WindowsService
         public ProjectInstaller()
         {
             InitializeComponent();
+        }
+
+        private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
+        {
+          var sc = new ServiceController((sender as ServiceInstaller).ServiceName);
+          sc.Start();
         }
     }
 }
