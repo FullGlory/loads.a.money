@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Initializers\ForceSingleUserInitializer.cs" />
     <Compile Include="Initializers\MigrateConfiguration.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="EFRepository.cs" />

@@ -38,7 +38,7 @@ namespace SpreadBet.Infrastructure.Data.Console
                     strategy = new MigrateDatabase();
                     break;
                 case BuildType.Rebuild:
-                    strategy = new RebuildDatabase();
+                    strategy = new ForceSingleUserInitializer<Context>(new RebuildDatabase());
                     break;
                 default:
                     strategy = new NullDatabase();

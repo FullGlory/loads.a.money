@@ -30,11 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,13 +50,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dummy.cs" />
+    <Compile Include="Agents\AgentTask.cs" />
+    <Compile Include="Agents\IPriceDataAgent.cs" />
+    <Compile Include="Agents\SpreadBetAgent.cs" />
     <Compile Include="Features\GatherPriceData.feature.cs">
       <DependentUpon>GatherPriceData.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\Hooks.cs" />
+    <Compile Include="Steps\MarketSteps.cs" />
+    <Compile Include="Steps\PriceDataCaptureSteps.cs" />
+    <Compile Include="Steps\PriceDataSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -60,6 +71,16 @@
       <LastGenOutput>GatherPriceData.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
+      <Project>{70bf6160-d9ba-40dc-8982-3be574c30f17}</Project>
+      <Name>SpreadBet.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Infrastructure.Data\SpreadBet.Infrastructure.Data.csproj">
+      <Project>{2f0f4ab5-b615-4bd3-adae-638e4de1ef1b}</Project>
+      <Name>SpreadBet.Infrastructure.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

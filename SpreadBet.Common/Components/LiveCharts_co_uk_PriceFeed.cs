@@ -22,6 +22,9 @@ namespace SpreadBet.Common.Components
 	/// <summary>
 	/// TODO: Update summary.
 	/// </summary>
+    /// <remarks>
+    /// TODO - TPL - http://msdn.microsoft.com/en-us/library/vstudio/jj155756.aspx
+    /// </remarks>
 	public class LiveCharts_co_uk_PriceFeed : IStockPriceProvider
 	{
 		private readonly List<string> _listUrls;
