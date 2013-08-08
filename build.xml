@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+  <Target Name="Sleep">
+   <Exec Command="timeout /t 5" IgnoreExitCode="true" />
+  </Target> 
+
   <PropertyGroup>
     <NUnitToolPath>$(MSBuildStartupDirectory)\packages\NUnit.Runners.2.6.2\tools\</NUnitToolPath>
     <DatabaseMigrator>SpreadBet.Infrastructure.Data.Console</DatabaseMigrator>
