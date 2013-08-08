@@ -15,11 +15,5 @@ namespace SpreadBet.WindowsService
         {
             InitializeComponent();
         }
-
-        private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
-        {
-          var sc = new ServiceController((sender as ServiceInstaller).ServiceName);
-          sc.Start();
-        }
     }
 }

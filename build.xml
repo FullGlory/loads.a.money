@@ -15,7 +15,9 @@
       <PlatformToBuild>Mixed Platforms</PlatformToBuild>
     </DotNetBuildConfiguration>
 
-    <WindowServicePackageBuildConfiguration Include="$(MSBuildStartupDirectory)\SpreadBet.WindowsService\SpreadBet.WindowsService.csproj"/>
+    <WindowServicePackageBuildConfiguration Include="$(MSBuildStartupDirectory)\SpreadBet.WindowsService\SpreadBet.WindowsService.csproj">
+      <WindowServiceName>SpreadBet</WindowServiceName>
+    </WindowServicePackageBuildConfiguration>
 
     <ConsolePackageBuildConfiguration Include="$(MSBuildStartupDirectory)\$(DatabaseMigrator)\$(DatabaseMigrator).csproj"/>
 

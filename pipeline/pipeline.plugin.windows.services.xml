@@ -48,6 +48,10 @@
                           DestinationFiles="$(ArtifactFolder)\$(WindowServicesFolder)\%(WindowServicePackageBuildConfiguration.FileName)\%(WindowServicePackageBuildConfiguration.FileName).exe.config"
                           Environment="$(PipelineStage)"/>
 
+    <!-- Stop  service (if present) -->
+    <Exec ContinueOnError="true"
+          Command="sc stop %(WindowServicePackageBuildConfiguration.WindowServiceName)" />                        
+
     <!-- Copy window service files to drop folder -->
     <Copy SourceFiles="@(WindowServiceDeploymentFiles)"
           DestinationFolder="$(DropFolder)\$(WindowServicesFolder)\%(WindowServicePackageBuildConfiguration.FileName)"/>  
@@ -67,6 +71,9 @@
     <!-- Install service-->
     <Exec WorkingDirectory="$(FrameworkPath)"
           Command="InstallUtil.exe -i &quot;$(DropFolder)\$(WindowServicesFolder)\%(WindowServicePackageBuildConfiguration.FileName)\%(WindowServicePackageBuildConfiguration.FileName).exe&quot;" />
+
+    <!-- Start service -->
+    <Exec Command="sc start %(WindowServicePackageBuildConfiguration.WindowServiceName)" />
 
   </Target>
 
