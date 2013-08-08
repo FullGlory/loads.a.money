@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="environment.config" />
     <None Include="Features\GatherPriceData.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GatherPriceData.feature.cs</LastGenOutput>
@@ -83,6 +84,9 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>echo f | xcopy /y /f $(ProjectDir)environment.config $(TargetDir)$(TargetFileName).environment.config</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
