@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{77423D4F-24B4-44C4-B029-046CAF4B22D5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SpreadBet.PriceGathering.Application.UnitTests</RootNamespace>
+    <AssemblyName>SpreadBet.PriceGathering.Application.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LiveCharts_co_uk_PriceReceiverTests.cs" />
+    <Compile Include="DynamicFilterTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=0-9" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=a" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=b" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=c" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=d" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=e" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=f" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=g" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=h" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=i" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=j" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=k" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=l" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=m" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=n" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=o" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=p" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=q" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=r" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=s" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=t" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=u" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=v" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=w" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=x" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=y" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\share_map.php%40letter=z" />
+    <EmbeddedResource Include="TestData\LiveChartsTestData\symbol-ALL" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
+      <Project>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</Project>
+      <Name>SpreadBet.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
+      <Project>{70BF6160-D9BA-40DC-8982-3BE574C30F17}</Project>
+      <Name>SpreadBet.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.PriceGathering.Application\SpreadBet.PriceGathering.Application.csproj">
+      <Project>{2B36408C-718D-4784-B2B3-C52696DFFE0B}</Project>
+      <Name>SpreadBet.PriceGathering.Application</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
