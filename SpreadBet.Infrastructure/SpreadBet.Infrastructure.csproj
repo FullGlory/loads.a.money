@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IProcessor.cs" />
+    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Messaging\Handlers\CommandProcessor.cs" />
     <Compile Include="Messaging\Handlers\ICommandHandlerRegistry.cs" />
     <Compile Include="Messaging\Handlers\MessageProcessor.cs" />

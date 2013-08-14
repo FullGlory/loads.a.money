@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.AcceptanceTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Infrastructure.Data.Console", "SpreadBet.Infrastructure.Data.Console\SpreadBet.Infrastructure.Data.Console.csproj", "{B506A020-8CC0-49B9-B18B-2CF9B3BA870F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Infrastructure.Logging.NLog", "SpreadBet.Infrastructure.Logging.NLog\SpreadBet.Infrastructure.Logging.NLog.csproj", "{97C4D7A4-BDFA-4082-BEA4-55689355351F}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = loads.a.money1.vsmdi
@@ -254,6 +256,16 @@ Global
 		{B506A020-8CC0-49B9-B18B-2CF9B3BA870F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B506A020-8CC0-49B9-B18B-2CF9B3BA870F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B506A020-8CC0-49B9-B18B-2CF9B3BA870F}.Release|x86.ActiveCfg = Release|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{97C4D7A4-BDFA-4082-BEA4-55689355351F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

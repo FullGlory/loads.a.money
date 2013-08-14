@@ -5,6 +5,7 @@ using System.Text;
 using SpreadBet.Common.Interfaces;
 using CuttingEdge.Conditions;
 using SpreadBet.Infrastructure;
+using SpreadBet.Scheduler;
 
 namespace SpreadBet.Application
 {
@@ -15,6 +16,7 @@ namespace SpreadBet.Application
 	{
 		private readonly IStockPriceProvider _priceProvider;
 		private readonly IStockDataProvider _stockDataProvider;
+        private readonly IScheduler _scheduler;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="GatherPriceData"/> class.
@@ -28,17 +30,28 @@ namespace SpreadBet.Application
 
 			this._priceProvider = stockPriceProvider;
 			this._stockDataProvider = stockDataProvider;
+
+            // TODO - inject this
+            this._scheduler = new Scheduler.Scheduler();
+
+            // Schedule the scrape every minute
+            this._scheduler.AddScheduledAction(()=>GetStockPrices(), new TimeSpan(0, 1, 0));
 		}
+
+        private void GetStockPrices()
+        {
+            var stockPrices = this._priceProvider.GetStockPrices();
+            this._stockDataProvider.SaveStockData(stockPrices);
+        }
 
 		public void Start()
 		{
-			var stockPrices = this._priceProvider.GetStockPrices();
-			this._stockDataProvider.SaveStockData(stockPrices);
+            this._scheduler.Start();
 		}
         
         public void Stop()
         {
-            // TODO - Do nothing
+            this._scheduler.Stop();
         }
     }
 }

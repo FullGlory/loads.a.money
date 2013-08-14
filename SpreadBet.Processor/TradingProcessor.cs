@@ -14,7 +14,7 @@
         private IUnityContainer _container;
         private List<IProcessor> _processors;
 
-        private IEnumerable<Task> _tasks;
+        private List<Task> _tasks = new List<Task>();
         private CancellationTokenSource _tokenSource;
 
         public TradingProcessor()
@@ -27,8 +27,6 @@
 
         public void Start()
         {
-            //this._processors.ForEach(p => p.Start());
-
             if (_tokenSource != null)
             {
                 throw new InvalidOperationException("Processor is already started");
@@ -37,33 +35,42 @@
             _tokenSource = new CancellationTokenSource();
             var cancellationToken = _tokenSource.Token;
 
-            _tasks = this._processors
-                         .Select(x => Task.Factory.StartNew( ()=>
+            foreach (var p in _processors)
+            {
+                var t = Task.Factory.StartNew(()=>
                              {
-                                 x.Start();
-                             }, cancellationToken));
+                                 p.Start();
+                             }, cancellationToken);
+                _tasks.Add(t);
+            }
         }
 
         public void Stop()
         {
-            _tokenSource.Cancel();
-            try
+            if (_tokenSource != null)
             {
-                Task.WaitAll(_tasks.ToArray());
-            }
-            catch (AggregateException /*ae*/)
-            {
-                // HACK - seems strange to "have" to catch this exception from WaitAll after cancelling the token
-            }
-            finally
-            {
-                _tokenSource.Dispose();
-                _tokenSource = null;
+                _tokenSource.Cancel();
+                try
+                {
+                    Task.WaitAll(_tasks.ToArray());
+                }
+                catch (AggregateException /*ae*/)
+                {
+                    // HACK - seems strange to "have" to catch this exception from WaitAll after cancelling the token
+                }
+                finally
+                {
+                    _tokenSource.Dispose();
+                    _tokenSource = null;
+                    _tasks.Clear();
+                }
             }
         }
 
         public void Dispose()
         {
+            Stop();
+
             this._container.Dispose();
         }
     }

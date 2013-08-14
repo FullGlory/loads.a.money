@@ -18,6 +18,7 @@ namespace SpreadBet.Common.Components
 	using CuttingEdge.Conditions;
     using SpreadBet.Domain;
     using SpreadBet.Domain.Interfaces;
+    using SpreadBet.Infrastructure.Logging;
 
 	/// <summary>
 	/// TODO: Update summary.
@@ -31,22 +32,26 @@ namespace SpreadBet.Common.Components
 		private readonly IScraper _scraper;
         private readonly IRepository _repository;
 		private readonly int _timePeriodLengthSecs;
+        private readonly ILogger _logger;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="LiveCharts_co_uk_PriceFeed"/> class.
-		/// </summary>
-		/// <param name="scraper">The scraper.</param>
-		/// <param name="repository">The repository.</param>
-		/// <param name="timePeriodLengthSecs">The time period length secs.</param>
-		public LiveCharts_co_uk_PriceFeed(IScraper scraper, IRepository repository, int timePeriodLengthSecs)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LiveCharts_co_uk_PriceFeed" /> class.
+        /// </summary>
+        /// <param name="scraper">The scraper.</param>
+        /// <param name="repository">The repository.</param>
+        /// <param name="timePeriodLengthSecs">The time period length secs.</param>
+        /// <param name="logger">The logger.</param>
+		public LiveCharts_co_uk_PriceFeed(IScraper scraper, IRepository repository, int timePeriodLengthSecs, ILogger logger)
 		{
 			Condition.Requires(scraper).IsNotNull();
             Condition.Requires(repository).IsNotNull();
 			Condition.Requires(timePeriodLengthSecs).IsGreaterThan(0);
+            Condition.Requires(logger).IsNotNull();
 
             this._repository = repository;
 			this._scraper = scraper;
 			this._timePeriodLengthSecs = timePeriodLengthSecs;
+            this._logger = logger;
 				
 			#region Set starting urls
 
@@ -94,7 +99,7 @@ namespace SpreadBet.Common.Components
 
             Parallel.ForEach<string>(GetPageUrls(), (url, state) =>
 			{
-				Console.WriteLine("crawling url " + url);
+                _logger.Debug("crawling url " + url);
 
 				var stock = ReadStockPrices(url, this._timePeriodLengthSecs);
 
@@ -120,7 +125,7 @@ namespace SpreadBet.Common.Components
 
 			Parallel.ForEach(this._listUrls, url => 
 			{
-				Console.WriteLine("getting stock urls for " + url);
+                _logger.Debug("getting stock urls for " + url);
 
 				var response = this._scraper.Scrape(url);
 				if (response.Success)
