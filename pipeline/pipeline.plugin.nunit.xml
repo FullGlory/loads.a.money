@@ -2,8 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <!--<NUnitToolPath Condition=" '$(NUnitToolPath)' == '' ">$(MSBuildStartupDirectory)\packages\NUnit.Runners.2.6.2\tools\</NUnitToolPath>-->
-	<NUnitToolPath Condition=" '$(NUnitToolPath)' == '' ">$(MSBuildStartupDirectory)\tools\</NUnitToolPath>
+	  <NUnitToolPath Condition=" '$(NUnitToolPath)' == '' ">$(MSBuildStartupDirectory)\tools\</NUnitToolPath>
     <NUnitConsoleTool>$(NUnitToolPath)nunit-console.exe</NUnitConsoleTool>
+    <NUnitConsoleTool-x86>$(NUnitToolPath)nunit-console-x86.exe</NUnitConsoleTool-x86>
     <NUnitConsoleToolArgs>/nologo /noshadow /xml=</NUnitConsoleToolArgs>
   </PropertyGroup>
 
@@ -61,6 +62,13 @@
     </ItemGroup>
 
     <Exec Command="&quot;$(NUnitConsoleTool)&quot; @(UnitTestAssemblies ->'&quot;%(Identity)&quot;',' ') $(NUnitConsoleToolArgs)&quot;$(MSBuildStartupDirectory)\unit-test-results.xml&quot;"
+          Condition=" '@(UnitTestAssemblies)' != '' "/>
+
+    <ItemGroup>
+      <UnitTestAssemblies-x86 Include="$(MSBuildStartupDirectory)\**\bin\$(Configuration)\*UnitTests-x86.dll"/>
+    </ItemGroup>
+
+    <Exec Command="&quot;$(NUnitConsoleTool-x86)&quot; @(UnitTestAssemblies-x86 ->'&quot;%(Identity)&quot;',' ') $(NUnitConsoleToolArgs)&quot;$(MSBuildStartupDirectory)\unit-test-results.xml&quot;"
           Condition=" '@(UnitTestAssemblies)' != '' "/>
 
   </Target>

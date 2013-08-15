@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SpreadBet.PriceGathering.Application.UnitTests</RootNamespace>
-    <AssemblyName>SpreadBet.PriceGathering.Application.UnitTests</AssemblyName>
+    <AssemblyName>SpreadBet.PriceGathering.Application.UnitTests-x86</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
