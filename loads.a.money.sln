@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.Common", "SpreadBet.Common\SpreadBet.Common.csproj", "{70D49911-0FB7-4292-9954-8D9AAA5B848F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37EF78CB-02B4-4FCE-BABB-E23D3139D6BD}"
@@ -56,6 +56,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.PriceGathering.Application", "SpreadBet.PriceGathering.Application\SpreadBet.PriceGathering.Application.csproj", "{2B36408C-718D-4784-B2B3-C52696DFFE0B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.PriceGathering.Application.UnitTests", "SpreadBet.PriceGathering.Application.UnitTests\SpreadBet.PriceGathering.Application.UnitTests.csproj", "{77423D4F-24B4-44C4-B029-046CAF4B22D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.MarketData", "SpreadBet.MarketData\SpreadBet.MarketData.csproj", "{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadBet.MarketData.UnitTests", "SpreadBet.MarketData.UnitTests\SpreadBet.MarketData.UnitTests.csproj", "{139FCDDE-37DE-42D8-B0AD-F342588C16EA}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -290,6 +294,26 @@ Global
 		{77423D4F-24B4-44C4-B029-046CAF4B22D5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{77423D4F-24B4-44C4-B029-046CAF4B22D5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{77423D4F-24B4-44C4-B029-046CAF4B22D5}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F1CEB464-C7D9-4676-BF9B-AF937A5AF86D}.Release|x86.ActiveCfg = Release|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{139FCDDE-37DE-42D8-B0AD-F342588C16EA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

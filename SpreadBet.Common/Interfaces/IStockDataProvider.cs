@@ -22,5 +22,7 @@ namespace SpreadBet.Common.Interfaces
 		IEnumerable<Stock> GetStocks();
         void UpdateStockPrice(StockPrice stockPrice);
         Stock GetStock(string identifier);
-	}
+
+        void AddStockPrice(StockPrice stockPrice);
+    }
 }
