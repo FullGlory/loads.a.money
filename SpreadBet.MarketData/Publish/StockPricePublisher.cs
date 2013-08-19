@@ -1,4 +1,6 @@
-﻿using SpreadBet.Infrastructure.Messaging;
+﻿using SpreadBet.Domain;
+using SpreadBet.Infrastructure.Messaging;
+using SpreadBet.Infrastructure.Serialisation;
 
 namespace SpreadBet.MarketData.Publish
 {
@@ -7,13 +9,15 @@ namespace SpreadBet.MarketData.Publish
         private readonly IMarket _market;
         private readonly IStockList _stockList;
         private readonly IPriceGateway _priceGateway;
+        private readonly ITextSerialiser _serialiser;
         private readonly IMessageSender _channel;
 
-        public StockPricePublisher(IMarket market, IStockList stockList, IPriceGateway priceGateway, IMessageSender channel)
+        public StockPricePublisher(IMarket market, IStockList stockList, IPriceGateway priceGateway, ITextSerialiser serialiser, IMessageSender channel)
         {
             this._market = market;
             this._stockList = stockList;
             this._priceGateway = priceGateway;
+            this._serialiser = serialiser;
             this._channel = channel;
         }
 
@@ -25,7 +29,14 @@ namespace SpreadBet.MarketData.Publish
                 {
                     var price = _priceGateway.GetStockPrice(stock.Identifier);
 
-                    _channel.Send(new Message());
+                    // TODO - set period
+                    var stockPrice = new StockPrice
+                    {
+                      Price = price,
+                      Stock = stock
+                    };
+
+                    _channel.Send(new Message{Body=_serialiser.Serialize(stockPrice)});
                 }
             }
         }

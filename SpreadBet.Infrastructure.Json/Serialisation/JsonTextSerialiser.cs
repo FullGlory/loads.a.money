@@ -33,5 +33,17 @@
 
             return this._serialiser.Deserialize(jsonReader);
         }
+
+
+        public string Serialize(object value)
+        {
+          throw new System.NotImplementedException();
+        }
+
+
+        public object Deserialize(string value)
+        {
+          throw new System.NotImplementedException();
+        }
     }
 }

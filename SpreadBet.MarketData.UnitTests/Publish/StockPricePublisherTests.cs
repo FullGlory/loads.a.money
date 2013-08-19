@@ -5,12 +5,15 @@ using NUnit.Framework;
 using SpreadBet.Domain;
 using SpreadBet.Infrastructure.Messaging;
 using SpreadBet.MarketData.Publish;
+using SpreadBet.Infrastructure.Serialisation;
+using System;
 
 namespace SpreadBet.MarketData.UnitTests.Publish
 {
     [TestFixture]
     public class StockPricePublisherTests
     {
+        private Mock<ITextSerialiser> _mockTextSerialiser;
         private Mock<IMessageSender> _mockOutputChannel;
         private Mock<IMarket> _mockMarket;
         private Mock<IStockList> _mockStockList;
@@ -20,6 +23,7 @@ namespace SpreadBet.MarketData.UnitTests.Publish
         [SetUp]
         public void SetUp()
         {
+            _mockTextSerialiser = new Mock<ITextSerialiser>();
             _mockOutputChannel = new Mock<IMessageSender>();
             _mockMarket = new Mock<IMarket>();
             _mockStockList = new Mock<IStockList>();
@@ -28,7 +32,8 @@ namespace SpreadBet.MarketData.UnitTests.Publish
             _feed = new StockPricePublisher(
                 _mockMarket.Object, 
                 _mockStockList.Object, 
-                _mockPriceGateway.Object, 
+                _mockPriceGateway.Object,
+                _mockTextSerialiser.Object,
                 _mockOutputChannel.Object);
         }
 
@@ -41,6 +46,8 @@ namespace SpreadBet.MarketData.UnitTests.Publish
             _mockStockList.Setup(x => x.GetStocks()).Returns(new List<Stock> { new Stock { Identifier = seedIdentifier } }.AsEnumerable());
             var seedPrice = 69.0M;
             _mockPriceGateway.Setup(x => x.GetStockPrice(seedIdentifier)).Returns(new Price { Bid = seedPrice });
+            var seedSerialisedObject = Guid.NewGuid().ToString();
+            _mockTextSerialiser.Setup(x=>x.Serialize(It.IsAny<StockPrice>())).Returns(seedSerialisedObject);
 
             // Act
             _feed.Publish();
@@ -49,9 +56,8 @@ namespace SpreadBet.MarketData.UnitTests.Publish
             _mockMarket.VerifyAll();
             _mockStockList.VerifyAll();
             _mockPriceGateway.VerifyAll();
-
-            // TODO - decide to use channel adapter or envelope??
-            _mockOutputChannel.Verify(x=>x.Send(It.IsAny<Message>()), Times.Once());
+            _mockTextSerialiser.VerifyAll();
+            _mockOutputChannel.Verify(x => x.Send(It.Is<Message>(m => m.Body == seedSerialisedObject)), Times.Once());
         }
     }
 }
