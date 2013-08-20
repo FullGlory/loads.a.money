@@ -45,9 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Endpoint\PriceFeedProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Publish\StockPricePublisherTests.cs" />
-    <Compile Include="Subscribe\StockPriceSubscriberTests.cs" />
+    <Compile Include="Publish\LiveChartsStockPriceReceiverTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -69,8 +69,14 @@
       <Project>{f1ceb464-c7d9-4676-bf9b-af937a5af86d}</Project>
       <Name>SpreadBet.MarketData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Scheduler\SpreadBet.Scheduler.csproj">
+      <Project>{58d484fa-ce7f-4ddc-9f78-fd3df849fab4}</Project>
+      <Name>SpreadBet.Scheduler</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Subscribe\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
