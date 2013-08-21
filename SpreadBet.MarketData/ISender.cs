@@ -7,6 +7,6 @@ namespace SpreadBet.MarketData
 {
     public interface ISender<T>
     {
-        void Send(Domain.StockPrice stockPrice);
+        void Send(T entity);
     }
 }
