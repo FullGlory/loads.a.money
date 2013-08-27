@@ -39,14 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Endpoint\PriceFeedPubSubProcessor.cs" />
+    <Compile Include="IStockPriceBot.cs" />
+    <Compile Include="LiveChartsStockPriceBot.cs" />
+    <Compile Include="PriceFeedBotProcessor.cs" />
     <Compile Include="IReceiver.cs" />
     <Compile Include="ISender.cs" />
-    <Compile Include="Endpoint\PriceFeedProcessor.cs" />
+    <Compile Include="PriceFeedProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Endpoint\PriceFeedPublishProcessor.cs" />
+    <Compile Include="PriceFeedPublishProcessor.cs" />
     <Compile Include="StraightThroughChannel.cs" />
-    <Compile Include="Endpoint\PriceFeedSubscribeProcessor.cs" />
+    <Compile Include="PriceFeedSubscribeProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">

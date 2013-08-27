@@ -120,6 +120,10 @@
       <Project>{007d45eb-8e80-4060-8a64-61ec305d6f77}</Project>
       <Name>SpreadBet.Processor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Scheduler\SpreadBet.Scheduler.csproj">
+      <Project>{58d484fa-ce7f-4ddc-9f78-fd3df849fab4}</Project>
+      <Name>SpreadBet.Scheduler</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

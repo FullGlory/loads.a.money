@@ -6,27 +6,27 @@ using SpreadBet.Common.Interfaces;
 using SpreadBet.Domain;
 using SpreadBet.Infrastructure;
 
-namespace SpreadBet.MarketData.Endpoint
+namespace SpreadBet.MarketData
 {
     public class PriceFeedSubscribeProcessor : IProcessor
     {
-        private readonly IReceiver<StockPrice> _inputChannel;
+        private readonly IReceiver<StockPrice> _priceFeed;
         private readonly IStockDataProvider _stockDataProvider;
 
-        public PriceFeedSubscribeProcessor(IReceiver<StockPrice> inputChannel, IStockDataProvider stockDataProvider)
+        public PriceFeedSubscribeProcessor(IReceiver<StockPrice> priceFeed, IStockDataProvider stockDataProvider)
         {
-            this._inputChannel = inputChannel;
+            this._priceFeed = priceFeed;
             this._stockDataProvider = stockDataProvider;
         }
 
         public void Start()
         {
-            this._inputChannel.Start((sp)=>this._stockDataProvider.AddStockPrice(sp));  
+            this._priceFeed.Start((sp)=>this._stockDataProvider.AddStockPrice(sp));  
         }
 
         public void Stop()
         {
-            this._inputChannel.Stop();
+            this._priceFeed.Stop();
         }
     }
 }

@@ -101,6 +101,10 @@
       <Project>{6ac92c42-fc85-484f-98dd-c10edb125988}</Project>
       <Name>SpreadBet.Domain.Handlers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Domain.Interfaces\SpreadBet.Domain.Interfaces.csproj">
+      <Project>{1a618831-697f-4c99-a0d5-ae6ef9bd1bed}</Project>
+      <Name>SpreadBet.Domain.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
       <Project>{70bf6160-d9ba-40dc-8982-3be574c30f17}</Project>
       <Name>SpreadBet.Domain</Name>
@@ -124,6 +128,10 @@
     <ProjectReference Include="..\SpreadBet.Infrastructure\SpreadBet.Infrastructure.csproj">
       <Project>{5104a584-d0e5-47b0-a2ec-8e575de5f28b}</Project>
       <Name>SpreadBet.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.MarketData\SpreadBet.MarketData.csproj">
+      <Project>{f1ceb464-c7d9-4676-bf9b-af937a5af86d}</Project>
+      <Name>SpreadBet.MarketData</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Processor\SpreadBet.Processor.csproj">
       <Project>{007d45eb-8e80-4060-8a64-61ec305d6f77}</Project>

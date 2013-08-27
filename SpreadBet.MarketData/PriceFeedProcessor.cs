@@ -1,7 +1,7 @@
 ﻿using SpreadBet.Domain;
 using SpreadBet.Infrastructure;
 
-namespace SpreadBet.MarketData.Endpoint
+namespace SpreadBet.MarketData
 {
     public class PriceFeedProcessor : IProcessor
     {
