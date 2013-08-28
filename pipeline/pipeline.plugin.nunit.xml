@@ -69,7 +69,7 @@
     </ItemGroup>
 
     <Exec Command="&quot;$(NUnitConsoleTool-x86)&quot; @(UnitTestAssemblies-x86 ->'&quot;%(Identity)&quot;',' ') $(NUnitConsoleToolArgs)&quot;$(MSBuildStartupDirectory)\unit-test-results.xml&quot;"
-          Condition=" '@(UnitTestAssemblies)' != '' "/>
+          Condition=" '@(UnitTestAssemblies-x86)' != '' "/>
 
   </Target>
 
