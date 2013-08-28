@@ -119,7 +119,6 @@
   <ItemGroup>
     <Content Include="..\packages\phantomjs.exe.1.8.1\tools\phantomjs\phantomjs.exe">
       <Link>phantomjs.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="phantomjs-license.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

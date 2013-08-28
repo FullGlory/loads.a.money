@@ -14,8 +14,8 @@
         private IUnityContainer _container;
         private List<IProcessor> _processors;
 
-        private List<Task> _tasks = new List<Task>();
-        private CancellationTokenSource _tokenSource;
+        //private List<Task> _tasks = new List<Task>();
+        //private CancellationTokenSource _tokenSource;
 
         public TradingProcessor()
         {
@@ -27,43 +27,52 @@
 
         public void Start()
         {
-            if (_tokenSource != null)
-            {
-                throw new InvalidOperationException("Processor is already started");
-            }
+            //if (_tokenSource != null)
+            //{
+            //    throw new InvalidOperationException("Processor is already started");
+            //}
 
-            _tokenSource = new CancellationTokenSource();
-            var cancellationToken = _tokenSource.Token;
+            //_tokenSource = new CancellationTokenSource();
+            //var cancellationToken = _tokenSource.Token;
+
+            //foreach (var p in _processors)
+            //{
+            //    var t = Task.Factory.StartNew(()=>
+            //                 {
+            //                     p.Start();
+            //                 }, cancellationToken);
+            //    _tasks.Add(t);
+            //}
 
             foreach (var p in _processors)
             {
-                var t = Task.Factory.StartNew(()=>
-                             {
-                                 p.Start();
-                             }, cancellationToken);
-                _tasks.Add(t);
+                p.Start();
             }
         }
 
         public void Stop()
         {
-            if (_tokenSource != null)
+            //if (_tokenSource != null)
+            //{
+            //    _tokenSource.Cancel();
+            //    try
+            //    {
+            //        Task.WaitAll(_tasks.ToArray());
+            //    }
+            //    catch (AggregateException /*ae*/)
+            //    {
+            //        // HACK - seems strange to "have" to catch this exception from WaitAll after cancelling the token
+            //    }
+            //    finally
+            //    {
+            //        _tokenSource.Dispose();
+            //        _tokenSource = null;
+            //        _tasks.Clear();
+            //    }
+            //}
+            foreach (var p in _processors)
             {
-                _tokenSource.Cancel();
-                try
-                {
-                    Task.WaitAll(_tasks.ToArray());
-                }
-                catch (AggregateException /*ae*/)
-                {
-                    // HACK - seems strange to "have" to catch this exception from WaitAll after cancelling the token
-                }
-                finally
-                {
-                    _tokenSource.Dispose();
-                    _tokenSource = null;
-                    _tasks.Clear();
-                }
+                p.Stop();
             }
         }
 
