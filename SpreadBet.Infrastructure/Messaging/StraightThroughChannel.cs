@@ -1,28 +1,34 @@
-﻿namespace SpreadBet.Infrastructure.Messaging
-{
-    using System;
+﻿using System;
 
+namespace SpreadBet.Infrastructure.Messaging
+{
     /// <summary>
-    /// Implementation of a basic messaging channel, when it receives a message, it notifies instantly any
-    /// receivers of the receipt of the message. 
+    ///  An implementation of a simple Message Channel that connects a sender to a receiver
     /// </summary>
-    public class StraightThroughChannel : IMessageSender, IMessageReceiver
+    /// <remarks>
+    /// Messaging applications transmit data through a Message Channel, a virtual pipe that connects a sender to a receiver
+    /// </remarks>
+    /// <typeparam name="T">Type of the data to send</typeparam>
+    public class StraightThroughChannel<T> : ISender<T>, IReceiver<T>
     {
-        public void Send(Message message)
+        private Action<T> _onReceive;
+
+        public void Send(T entity)
         {
-            this.MessageReceived(this, new MessageReceivedEventArgs(message));
+            if (this._onReceive != null)
+            {
+                this._onReceive(entity);
+            }
         }
 
-        public event EventHandler<MessageReceivedEventArgs> MessageReceived = (sender, args) => { };
-
-        public void Start()
+        public void Start(Action<T> onReceive)
         {
-            // Do nothing
+            this._onReceive = onReceive;
         }
 
         public void Stop()
         {
-            // Do nothing
+
         }
     }
 }

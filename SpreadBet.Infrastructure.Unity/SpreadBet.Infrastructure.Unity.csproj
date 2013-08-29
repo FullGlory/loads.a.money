@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interception\LoggingBehaviour.cs" />
-    <Compile Include="Messaging\Handlers\UnityCommandHandlerRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityHelper.cs" />
   </ItemGroup>
@@ -67,14 +66,6 @@
     <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
       <Project>{70d49911-0fb7-4292-9954-8d9aaa5b848f}</Project>
       <Name>SpreadBet.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpreadBet.Domain.Commands\SpreadBet.Domain.Commands.csproj">
-      <Project>{4b8ff03f-5762-4ff7-a3f9-9ff95eeb181f}</Project>
-      <Name>SpreadBet.Domain.Commands</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpreadBet.Domain.Handlers\SpreadBet.Domain.Handlers.csproj">
-      <Project>{6ac92c42-fc85-484f-98dd-c10edb125988}</Project>
-      <Name>SpreadBet.Domain.Handlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Infrastructure\SpreadBet.Infrastructure.csproj">
       <Project>{5104a584-d0e5-47b0-a2ec-8e575de5f28b}</Project>

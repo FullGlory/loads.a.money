@@ -58,10 +58,6 @@
       <Project>{70D49911-0FB7-4292-9954-8D9AAA5B848F}</Project>
       <Name>SpreadBet.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpreadBet.Domain.Commands\SpreadBet.Domain.Commands.csproj">
-      <Project>{4b8ff03f-5762-4ff7-a3f9-9ff95eeb181f}</Project>
-      <Name>SpreadBet.Domain.Commands</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Domain.Interfaces\SpreadBet.Domain.Interfaces.csproj">
       <Project>{1a618831-697f-4c99-a0d5-ae6ef9bd1bed}</Project>
       <Name>SpreadBet.Domain.Interfaces</Name>

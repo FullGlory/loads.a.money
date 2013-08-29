@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SpreadBet.Common.Interfaces;
-using SpreadBet.Domain;
+﻿using SpreadBet.Domain;
 using SpreadBet.Infrastructure;
+using SpreadBet.Infrastructure.Messaging;
 
 namespace SpreadBet.MarketData
 {

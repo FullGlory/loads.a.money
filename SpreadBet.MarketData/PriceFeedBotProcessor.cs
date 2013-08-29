@@ -1,5 +1,6 @@
 ﻿using System;
 using SpreadBet.Domain;
+using SpreadBet.Infrastructure.Messaging;
 using SpreadBet.Scheduler;
 
 namespace SpreadBet.MarketData

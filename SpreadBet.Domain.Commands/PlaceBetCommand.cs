@@ -1,7 +1,7 @@
-﻿namespace SpreadBet.Domain.Commands
-{
-    using SpreadBet.Infrastructure.Messaging;
+﻿using SpreadBet.Infrastructure.Messaging;
 
+namespace SpreadBet.Domain.Commands
+{
     public class PlaceBetCommand : ICommand
     {
         public string StockIdentifier { get; set; }
