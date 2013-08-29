@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{58D484FA-CE7F-4DDC-9F78-FD3DF849FAB4}</ProjectGuid>
+    <ProjectGuid>{CB85BB8D-9F3E-4C51-9AEC-898A6884C31D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpreadBet.Scheduler</RootNamespace>
-    <AssemblyName>SpreadBet.Scheduler</AssemblyName>
+    <RootNamespace>SpreadBet.Infrastructure.Data.UnitTests</RootNamespace>
+    <AssemblyName>SpreadBet.Infrastructure.Data.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.1.1308.2321\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,11 +45,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DelegateSchedulerItem.cs" />
-    <Compile Include="IScheduler.cs" />
-    <Compile Include="Scheduler.cs" />
-    <Compile Include="SchedulerItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StockPriceRepositoryTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpreadBet.Domain.Interfaces\SpreadBet.Domain.Interfaces.csproj">
+      <Project>{1a618831-697f-4c99-a0d5-ae6ef9bd1bed}</Project>
+      <Name>SpreadBet.Domain.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
+      <Project>{70bf6160-d9ba-40dc-8982-3be574c30f17}</Project>
+      <Name>SpreadBet.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Infrastructure.Data\SpreadBet.Infrastructure.Data.csproj">
+      <Project>{2f0f4ab5-b615-4bd3-adae-638e4de1ef1b}</Project>
+      <Name>SpreadBet.Infrastructure.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

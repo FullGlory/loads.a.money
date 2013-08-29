@@ -1,5 +1,6 @@
 ﻿using SpreadBet.Common.Interfaces;
 using SpreadBet.Domain;
+using SpreadBet.Domain.Interfaces;
 using SpreadBet.Infrastructure;
 using SpreadBet.Infrastructure.Messaging;
 
@@ -8,19 +9,19 @@ namespace SpreadBet.MarketData
     public class PriceFeedSubscribeProcessor : IProcessor
     {
         private readonly IReceiver<StockPrice> _priceFeed;
-        private readonly IStockDataProvider _stockDataProvider;
+        private readonly IStockPriceRepository _stockPriceRepository;
 
-        public PriceFeedSubscribeProcessor(IReceiver<StockPrice> priceFeed, IStockDataProvider stockDataProvider)
+        public PriceFeedSubscribeProcessor(IReceiver<StockPrice> priceFeed, IStockPriceRepository stockPriceRepository)
         {
             this._priceFeed = priceFeed;
-            this._stockDataProvider = stockDataProvider;
+            this._stockPriceRepository = stockPriceRepository;
         }
 
         public void Start()
         {
             this._priceFeed.Start((sp) =>
                 {
-                    this._stockDataProvider.AddStockPrice(sp);
+                    this._stockPriceRepository.AddStockPrice(sp);
                 });  
         }
 

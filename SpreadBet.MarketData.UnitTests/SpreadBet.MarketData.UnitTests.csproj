@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PriceFeedBotProcessorTests.cs" />
+    <Compile Include="PriceFeedSubscribeProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +56,10 @@
     <ProjectReference Include="..\SpreadBet.Common\SpreadBet.Common.csproj">
       <Project>{70d49911-0fb7-4292-9954-8d9aaa5b848f}</Project>
       <Name>SpreadBet.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpreadBet.Domain.Interfaces\SpreadBet.Domain.Interfaces.csproj">
+      <Project>{1a618831-697f-4c99-a0d5-ae6ef9bd1bed}</Project>
+      <Name>SpreadBet.Domain.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpreadBet.Domain\SpreadBet.Domain.csproj">
       <Project>{70bf6160-d9ba-40dc-8982-3be574c30f17}</Project>

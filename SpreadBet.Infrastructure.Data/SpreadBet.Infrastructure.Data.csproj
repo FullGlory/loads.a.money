@@ -51,6 +51,7 @@
     <Compile Include="Initializers\MigrateDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Initializers\RebuildDatabase.cs" />
+    <Compile Include="StockPriceRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

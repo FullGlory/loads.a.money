@@ -1,18 +1,9 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Scheduler.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
+﻿using System;
+using System.Collections.Generic;
 
 namespace SpreadBet.Scheduler
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using CuttingEdge.Conditions;
-
-	/// <summary>
+    /// <summary>
 	/// Scheduler class
 	/// </summary>
 	public class Scheduler : IScheduler

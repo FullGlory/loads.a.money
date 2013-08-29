@@ -17,7 +17,6 @@ namespace SpreadBet.Scheduler
 	internal class DelegateSchedulerItem : SchedulerItem
 	{
 		private ScheduledActiondDelegate _action;
-		private TimeSpan timeout;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DelegateSchedulerItem"/> class.

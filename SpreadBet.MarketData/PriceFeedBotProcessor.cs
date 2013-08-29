@@ -9,24 +9,31 @@ namespace SpreadBet.MarketData
     {
         private readonly IScheduler _scheduler;
         private readonly IStockPriceBot _bot;
+        private readonly string _schedulerConfig;
+        private bool _schedulerConfigured = false;
 
-        public PriceFeedBotProcessor(IScheduler scheduler, IStockPriceBot bot, ISender<StockPrice> priceFeed)
+        public PriceFeedBotProcessor(IScheduler scheduler, IStockPriceBot bot, ISender<StockPrice> priceFeed, string schedulerConfig)
             : base(priceFeed)
         {
             this._scheduler = scheduler;
             this._bot = bot;
-            this._scheduler.AddScheduledAction(Scheduler_Elapsed, TimeSpan.FromSeconds(5));
+            this._schedulerConfig = schedulerConfig;
         }
 
         protected override void OnStart()
         {
-            this._scheduler.Start();
-        }
+            if (!_schedulerConfigured)
+            {
+                this._scheduler.AddScheduledAction(
+                    () => 
+                    {
+                        this._bot.Scrape((sp) => this.GetPriceFeed().Send(sp));
+                    }, 
+                    TimeSpan.Parse(this._schedulerConfig));
 
-        private void Scheduler_Elapsed()
-        {
-            this._scheduler.Stop();
-            this._bot.Scrape((sp) => this.GetPriceFeed().Send(sp));
+                _schedulerConfigured = true;
+            }
+
             this._scheduler.Start();
         }
 
