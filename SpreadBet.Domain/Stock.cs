@@ -16,5 +16,10 @@ namespace SpreadBet.Domain
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string Security { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Stock [Id: {0}, Identifier: {1}]", Id, Identifier);
+        }
 	}
 }

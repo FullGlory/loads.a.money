@@ -15,5 +15,7 @@ namespace SpreadBet.Domain
 	{
 		public DateTime From { get; set; }
 		public DateTime To { get; set; }
-	}
+
+        public int PeriodId { get; set; }
+    }
 }

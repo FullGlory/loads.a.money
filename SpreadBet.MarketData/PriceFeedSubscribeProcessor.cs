@@ -21,7 +21,10 @@ namespace SpreadBet.MarketData
 
         public void Start()
         {
-            this._priceFeed.Start((sp)=>this._stockDataProvider.AddStockPrice(sp));  
+            this._priceFeed.Start((sp) =>
+                {
+                    this._stockDataProvider.AddStockPrice(sp);
+                });  
         }
 
         public void Stop()

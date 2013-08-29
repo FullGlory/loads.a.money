@@ -13,8 +13,11 @@ namespace SpreadBet.Infrastructure.Data.Initializers
 
         public void InitializeDatabase(TContext context)
         {
-            var dbName = context.Database.Connection.Database;
-            context.Database.ExecuteSqlCommand(string.Format("ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE", dbName));
+            if (context.Database.Exists())
+            {
+                var dbName = context.Database.Connection.Database;
+                context.Database.ExecuteSqlCommand(string.Format("ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE", dbName));
+            }
             _initializer.InitializeDatabase(context);
         }
     }

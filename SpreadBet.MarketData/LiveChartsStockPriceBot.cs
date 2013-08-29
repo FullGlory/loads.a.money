@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using SpreadBet.Common.Helpers;
@@ -17,6 +15,7 @@ namespace SpreadBet.MarketData
         private readonly ILogger _logger;
         private readonly IScraper _scraper;
 	    private readonly List<string> _stockUrls;
+        private bool _stopped;
 
         public LiveChartsStockPriceBot(ILogger logger, IScraper scraper)
         {
@@ -61,35 +60,48 @@ namespace SpreadBet.MarketData
 
         public void Scrape(Action<StockPrice> onPriceRead)
         {
+            _stopped = false;
+
             // Get the list of stocks that need to be scraped
 			GetStockPageUrls((urls) =>
 			{
 				// Now start to relay information about each stock
 				GetStockPrices(urls, (stockPrice) =>
 				{
-                    onPriceRead(stockPrice);
+                    if (!_stopped)
+                    {
+                        onPriceRead(stockPrice);
+                    }
 				});
 			});
         }
 
         private void GetStockPageUrls(Action<List<string>> onGetStocksList)
         {
+            if (_stopped) return;
+
             var baseUrl = new Uri("http://www.livecharts.co.uk");
 
             Parallel.ForEach(this._stockUrls, (url, state) =>
             {
-                this._logger.Debug("getting stock urls for " + url);
+                if (_stopped)
+                {
+                    state.Break();
+                }
+                else
+                {
+                    this._logger.Debug("getting stock urls for " + url);
 
                     var response = this._scraper.Scrape(url);
                     if (response.Success)
                     {
                         // Get information about the available stocks
                         var stocks = Regex.Matches(response.Content, "(?ismx)" +
-                                                                      "<span[^>]*?class\\s?=\\s?[\\\"\\']lookup-one[\\\"\\'][^>]*?>[^<]*?" +
-                                                                      "<a[^>]*?href\\s?=\\s?[\\\"\\'](?<url>share_prices/share_price[^\\\"\\']*)[^>]*?>" +
-                                                                      "\\s*(?<identifier>[^<]*?)\\s*</\\s?a>[^<]*?</\\s?span>[^<]*?" +
-                                                                      "<span[^>]*?class\\s?=\\s?[\\\"\\']lookup-two[\\\"\\'][^>]*?>[^<]*?" +
-                                                                      "<a[^>]*?>\\s*(?<name>[^<]*?)\\s*</\\s?a>")
+                                                                        "<span[^>]*?class\\s?=\\s?[\\\"\\']lookup-one[\\\"\\'][^>]*?>[^<]*?" +
+                                                                        "<a[^>]*?href\\s?=\\s?[\\\"\\'](?<url>share_prices/share_price[^\\\"\\']*)[^>]*?>" +
+                                                                        "\\s*(?<identifier>[^<]*?)\\s*</\\s?a>[^<]*?</\\s?span>[^<]*?" +
+                                                                        "<span[^>]*?class\\s?=\\s?[\\\"\\']lookup-two[\\\"\\'][^>]*?>[^<]*?" +
+                                                                        "<a[^>]*?>\\s*(?<name>[^<]*?)\\s*</\\s?a>")
                                     .OfType<Match>()
                                     .Select(match => new
                                     {
@@ -108,20 +120,30 @@ namespace SpreadBet.MarketData
                             onGetStocksList(urls);
                         }
                     }
+                }
             });
         }
 
         private void GetStockPrices(IEnumerable<string> pageUrls, Action<StockPrice> onGetStockPrice)
         {
+            if (_stopped) return;
+
             Parallel.ForEach<string>(pageUrls, (url, state) =>
             {
-                this._logger.Debug("crawling url " + url);
-
-                var stock = ReadStockPrices(url);
-
-                if (stock != null)
+                if (_stopped)
                 {
-                    onGetStockPrice(stock);
+                    state.Break();
+                }
+                else
+                {
+                    this._logger.Debug("crawling url " + url);
+
+                    var stock = ReadStockPrices(url);
+
+                    if (stock != null)
+                    {
+                        onGetStockPrice(stock);
+                    }
                 }
             });
         }
@@ -202,6 +224,12 @@ namespace SpreadBet.MarketData
                     UpdatedAt = DateTime.Now
                 }
             };
+        }
+
+
+        public void Stop()
+        {
+            _stopped = true;
         }
     }
 }

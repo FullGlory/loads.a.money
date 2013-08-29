@@ -7,7 +7,8 @@
 	public class Context : DbContext
     {
         public Context() : base("SpreadBet") 
-        {}
+        {
+        }
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Price> Prices { get; set; }
@@ -18,9 +19,9 @@
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            base.OnModelCreating(modelBuilder);
 
-			base.OnModelCreating(modelBuilder);
+			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 		}
 	}
 }

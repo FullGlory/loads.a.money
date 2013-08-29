@@ -30,7 +30,7 @@ namespace SpreadBet.Common.Helpers
 
 			return new Period
 			{
-				Id = (int)periodStart,
+				PeriodId = (int)periodStart,
 				From = new DateTime((int)periodStart + __PERIODSEED),
 				To = new DateTime((int)periodStart + __PERIODSEED).AddSeconds(periodLengthSecs)
 			};

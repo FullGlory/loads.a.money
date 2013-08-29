@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using SpreadBet.Domain;
-using SpreadBet.Infrastructure.Logging;
 using SpreadBet.Scheduler;
 
 namespace SpreadBet.MarketData
@@ -35,6 +31,7 @@ namespace SpreadBet.MarketData
 
         protected override void OnStop()
         {
+            this._bot.Stop();
             this._scheduler.Stop();
         }
     }

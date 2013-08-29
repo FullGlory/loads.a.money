@@ -50,9 +50,18 @@ namespace SpreadBet.Common.Components
             return this._repository.Get<Stock>(s => s.Identifier.Equals(identifier));
         }
 
-
         public void AddStockPrice(StockPrice stockPrice)
         {
+            // Stock - We may already know about the stock
+            var stock = this._repository.Get<Stock>(s => s.Identifier.Equals(stockPrice.Stock.Identifier));
+
+            if (stock != null)
+            {
+                stockPrice.Stock = stock;
+            }
+
+            // TODO - Period - We may already know about the period
+
             _repository.SaveOrUpdate<StockPrice>(stockPrice);
         }
     }

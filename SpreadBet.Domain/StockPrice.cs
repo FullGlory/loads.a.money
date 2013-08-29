@@ -17,5 +17,10 @@ namespace SpreadBet.Domain
 		public Stock Stock { get; set; }
 		public Price Price { get; set; }
 		public DateTime UpdatedAt { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("StockPrice [Id: {0}, Identifier: {1}, Price: {2}]", Id, Stock.Identifier, Price.Mid);
+        }
 	}
 }
