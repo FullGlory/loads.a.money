@@ -26,13 +26,15 @@ namespace SpreadBet.Common.Helpers
 			var ticks = dateTime.Ticks - __PERIODSEED;
 			var ticksPerPeriod = new TimeSpan(0, 0, periodLengthSecs).Ticks;
 
-			var periodStart = Math.Floor((decimal)ticks / ticksPerPeriod) + 1;
+            int periodStart = (int)Math.Floor((decimal)ticks / ticksPerPeriod) + 1;
+
+            var baseDate = new DateTime((periodStart*ticksPerPeriod) + __PERIODSEED);
 
 			return new Period
 			{
-				PeriodId = (int)periodStart,
-				From = new DateTime((int)periodStart + __PERIODSEED),
-				To = new DateTime((int)periodStart + __PERIODSEED).AddSeconds(periodLengthSecs)
+				PeriodId = periodStart,
+                From = baseDate,
+                To = baseDate.AddSeconds(periodLengthSecs)
 			};
 		}
 	}

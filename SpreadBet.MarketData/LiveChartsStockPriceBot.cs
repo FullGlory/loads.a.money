@@ -82,7 +82,7 @@ namespace SpreadBet.MarketData
 
             var baseUrl = new Uri("http://www.livecharts.co.uk");
 
-            Parallel.ForEach(this._stockUrls, (url, state) =>
+            Parallel.ForEach(this._stockUrls, new ParallelOptions { MaxDegreeOfParallelism = 1 }, (url, state) =>
             {
                 if (_stopped)
                 {
@@ -128,7 +128,7 @@ namespace SpreadBet.MarketData
         {
             if (_stopped) return;
 
-            Parallel.ForEach<string>(pageUrls, (url, state) =>
+            Parallel.ForEach<string>(pageUrls,new ParallelOptions{MaxDegreeOfParallelism=1}, (url, state) =>
             {
                 if (_stopped)
                 {

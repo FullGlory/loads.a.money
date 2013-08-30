@@ -57,19 +57,19 @@
 		{
             using (var ctx = new Context())
             {
-              RecurseObjectGraph(ctx, entity);
+              AttachObjectGraph(ctx, entity);
 
               ctx.SaveChanges();
             }
 		}
 
         /// <summary>
-        /// Recurses the object graph - attaching any entity to the EF Context if it is "known"
+        /// Attach the object graph to the EF Context
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="ctx">The CTX.</param>
         /// <param name="entity">The entity.</param>
-        private void RecurseObjectGraph<T>(Context ctx, T entity) where T : Entity
+        private void AttachObjectGraph<T>(Context ctx, T entity) where T : Entity
         {
             // Check children
             var entityType = typeof(Entity);
@@ -80,7 +80,7 @@
                     object propValue = prop.GetValue(entity, null);
                     if (propValue != null)
                     {
-                        RecurseObjectGraph(ctx, (Entity)propValue);
+                        AttachObjectGraph(ctx, (Entity)propValue);
                     }
                 }
             }
